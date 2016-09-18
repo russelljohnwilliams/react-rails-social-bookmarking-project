@@ -10,7 +10,7 @@ const Home = () => (
    <LoginBox url="http://localhost:5000/" />
 
     <Link className="user-link" to='/'> User Page </Link>
-   <h1>help</h1>
+   <h1>Home bit</h1>
   </div>
 
 )

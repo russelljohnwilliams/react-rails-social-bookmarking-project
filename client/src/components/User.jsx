@@ -29,9 +29,15 @@ const User = React.createClass({
       request.send( null )
   },
 
-  doSearch(event){
-    this.setState({searchQuery: event.target.value})
-  },
+  // doSearch(event){
+  //   this.setState({searchQuery: event.target.value})
+  // },
+
+
+// pu in nav after <link>
+
+// <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+
 
   render(){
 
@@ -39,7 +45,7 @@ const User = React.createClass({
       <div className="user">
         <nav>
           <Link className="title" to='/'>Bookmarker</Link>
-          <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+          <Link className="login" to='/home'>Login</Link>
         </nav>
         <div className='images-container'>
           

@@ -68,9 +68,8 @@
 	      React.createElement(
 	        Route,
 	        { path: '/', component: Main },
-	        React.createElement(IndexRoute, { component: Home }),
-	        React.createElement(Route, { path: '/user', component: User }),
-	        React.createElement(Route, { path: '/image', component: Image })
+	        React.createElement(IndexRoute, { component: User }),
+	        React.createElement(Route, { path: '/home', component: Home })
 	      )
 	    );
 	  }
@@ -85,6 +84,8 @@
 	
 	
 	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
+	
+	// <Route path='/user' component={User} />
 
 /***/ },
 /* 1 */
@@ -25464,7 +25465,7 @@
 	    React.createElement(
 	      'h1',
 	      null,
-	      'help'
+	      'Home bit'
 	    )
 	  );
 	};
@@ -25968,9 +25969,18 @@
 	    };
 	    request.send(null);
 	  },
-	  doSearch: function doSearch(event) {
-	    this.setState({ searchQuery: event.target.value });
-	  },
+	
+	
+	  // doSearch(event){
+	  //   this.setState({searchQuery: event.target.value})
+	  // },
+	
+	
+	  // pu in nav after <link>
+	
+	  // <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+	
+	
 	  render: function render() {
 	    var _this2 = this;
 	
@@ -25985,7 +25995,11 @@
 	          { className: 'title', to: '/' },
 	          'Bookmarker'
 	        ),
-	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
+	        React.createElement(
+	          Link,
+	          { className: 'login', to: '/home' },
+	          'Login'
+	        )
 	      ),
 	      React.createElement(
 	        'div',

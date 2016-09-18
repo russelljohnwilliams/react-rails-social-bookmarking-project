@@ -12,9 +12,8 @@ const App = React.createClass({
       return(
          <Router history={hashHistory}>
           <Route path='/' component={Main}>
-            <IndexRoute component={Home} />
-            <Route path='/user' component={User} />
-            <Route path='/image' component={Image} />
+            <IndexRoute component={User} />
+            <Route path='/home' component={Home} />
           </Route>
          </Router>
         )
@@ -31,3 +30,7 @@ const App = React.createClass({
 
 
 ReactDOM.render(<App />, document.getElementById('app'))
+
+
+
+            // <Route path='/user' component={User} />
