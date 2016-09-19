@@ -1,45 +1,30 @@
+
 const React = require('react')
 const Router = require('react-router')
 const Image = require('./Image')
 const {Link, browserHistory} = Router
  
-const Gallery = React.createClass({
+const User = React.createClass({
 
   getInitialState(){
-    return {searchQuery: '', images: [], user_id: ''}
+    return {searchQuery: '', images: []}
   },
 
   componentDidMount(){
-    const url = 'http://localhost:5000/users/[????]'
+    const url = 'http://localhost:5000/users/1'
     const request = new XMLHttpRequest()
     request.open( "GET", url )
-    request.setRequestHeader('Content-Type', "application/json")
-    request.withCredentials = true
 
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
         const data2 = data.reverse()
-        console.log(data2)
+        console.log("data:", data)
         this.setState({images: data2})
-        }
-        else{
-          console.log("Oh dear, you ain't logged in")
-          browserHistory.goBack()
         }
       }
       request.send( null )
   },
-
-  doSearch(event){
-    this.setState({searchQuery: event.target.value})
-  },
-
-
-// pu in nav after <link>
-
-// 
-
 
   render(){
 
@@ -48,19 +33,11 @@ const Gallery = React.createClass({
         <nav>
           <Link className="title" to='/'>Bookmarker</Link>
           <Link className="login" to='/home'>Login</Link>
+          <Link className="userpage" to='/users'>User</Link>
           <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
         </nav>
         <div className='images-container'>
-          
-          {
-            this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-              .map((image) => (
-              <Image { ...image } key={image.title} />
-              ))
-
-
-          }
-
+           
         </div>
       </div>
       )
@@ -69,4 +46,62 @@ const Gallery = React.createClass({
 })
 
 
-module.exports = Gallery
+module.exports = User
+
+
+
+
+
+
+// const React = require('react')
+
+ 
+// const User = React.createClass({
+
+//   getInitialState(){
+//     return {currentUser: null}
+//   },
+
+//   setUser(user){
+//     this.setState({ currentUser: user })
+//   },
+
+//   componentDidMount(){
+//     const request = new XMLHttpRequest()
+//     request.open("GET", "http://localhost:5000/users/sign_in")
+//     request.setRequestHeader("Content-Type", "application/json")
+//     request.withCredentials = true
+//     request.onload = () => {
+//       if(request.status === 200) {
+//         const receivedUser = JSON.parse(request.responseText)
+//         this.setUser(receivedUser)
+//       }else if(request.status === 401){
+//         this.setState({currentUser: false})
+//       }
+//     }
+//     request.send(null)
+//   },
+
+//   render(){
+
+//     let userDiv = <div className="user">
+//        <h1>None yet ....</h1>
+//     </div>
+
+//     if(this.state.currentUser){
+//       userDiv = <div className="user">
+//           <h1>{this.state.currentUser.email}</h1>
+//       </div>
+//     } 
+//     console.log(userDiv)
+//     return(
+//       <div>
+//         {userDiv}
+//       </div>
+//     )
+//   }
+
+// })
+
+
+// module.exports = User

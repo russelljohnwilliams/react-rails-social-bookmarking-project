@@ -11,12 +11,10 @@ const LoginBox = React.createClass({
   },
 
   setUser(user){
-    console.log(user)
     this.setState({ currentUser: user, favList: [] })
   },
 
     componentDidMount(){
-      console.log(this.props.url)
       const request = new XMLHttpRequest()
       request.open("GET", this.props.url + "users.json")
       request.setRequestHeader("Content-Type", "application/json")
@@ -25,7 +23,6 @@ const LoginBox = React.createClass({
         if(request.status === 200) {
           const receivedUser = JSON.parse(request.responseText)
           this.setUser(receivedUser)
-          console.log(receivedUser)
       
 
         }else if(request.status === 401){
@@ -46,7 +43,7 @@ const LoginBox = React.createClass({
     if(this.state.currentUser){
       mainDiv = <div>
 
-      <h4>Welcome {this.state.currentUser.id}</h4>
+      <h4>Welcome {this.state.currentUser.user_name}</h4>
       <SignOut url={this.props.url + "users/sign_out.json"}
       onSignOut={this.setUser}/>
       </div>

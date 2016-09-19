@@ -25457,9 +25457,8 @@
 	    React.createElement('br', null),
 	    React.createElement(
 	      Link,
-	      { className: 'user-link', to: '/user' },
-	      ' user page ',
-	      ' '
+	      { className: 'user-link', to: '/users' },
+	      ' user page '
 	    ),
 	    React.createElement(
 	      'h1',
@@ -25488,13 +25487,11 @@
 	    return { currentUser: null };
 	  },
 	  setUser: function setUser(user) {
-	    console.log(user);
 	    this.setState({ currentUser: user, favList: [] });
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    console.log(this.props.url);
 	    var request = new XMLHttpRequest();
 	    request.open("GET", this.props.url + "users.json");
 	    request.setRequestHeader("Content-Type", "application/json");
@@ -25503,7 +25500,6 @@
 	      if (request.status === 200) {
 	        var receivedUser = JSON.parse(request.responseText);
 	        _this.setUser(receivedUser);
-	        console.log(receivedUser);
 	      } else if (request.status === 401) {
 	        _this.setState({ currentUser: false });
 	      }
@@ -25531,7 +25527,7 @@
 	          'h4',
 	          null,
 	          'Welcome ',
-	          this.state.currentUser.id
+	          this.state.currentUser.user_name
 	        ),
 	        React.createElement(SignOut, { url: this.props.url + "users/sign_out.json",
 	          onSignOut: this.setUser })
@@ -26074,8 +26070,6 @@
 
 	'use strict';
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
 	var Image = __webpack_require__(232);
@@ -26083,45 +26077,29 @@
 	var browserHistory = Router.browserHistory;
 	
 	
-	var Gallery = React.createClass({
-	  displayName: 'Gallery',
+	var User = React.createClass({
+	  displayName: 'User',
 	  getInitialState: function getInitialState() {
-	    return { searchQuery: '', images: [], user_id: '' };
+	    return { searchQuery: '', images: [] };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    var url = 'http://localhost:5000/users/[????]';
+	    var url = 'http://localhost:5000/users/1';
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
-	    request.setRequestHeader('Content-Type', "application/json");
-	    request.withCredentials = true;
 	
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
 	        var data2 = data.reverse();
-	        console.log(data2);
+	        console.log("data:", data);
 	        _this.setState({ images: data2 });
-	      } else {
-	        console.log("Oh dear, you ain't logged in");
-	        browserHistory.goBack();
 	      }
 	    };
 	    request.send(null);
 	  },
-	  doSearch: function doSearch(event) {
-	    this.setState({ searchQuery: event.target.value });
-	  },
-	
-	
-	  // pu in nav after <link>
-	
-	  // 
-	
-	
 	  render: function render() {
-	    var _this2 = this;
 	
 	    return React.createElement(
 	      'div',
@@ -26139,22 +26117,72 @@
 	          { className: 'login', to: '/home' },
 	          'Login'
 	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'userpage', to: '/users' },
+	          'User'
+	        ),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'images-container' },
-	        this.state.images.filter(function (image) {
-	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
-	        }).map(function (image) {
-	          return React.createElement(Image, _extends({}, image, { key: image.title }));
-	        })
-	      )
+	      React.createElement('div', { className: 'images-container' })
 	    );
 	  }
 	});
 	
-	module.exports = Gallery;
+	module.exports = User;
+	
+	// const React = require('react')
+	
+	
+	// const User = React.createClass({
+	
+	//   getInitialState(){
+	//     return {currentUser: null}
+	//   },
+	
+	//   setUser(user){
+	//     this.setState({ currentUser: user })
+	//   },
+	
+	//   componentDidMount(){
+	//     const request = new XMLHttpRequest()
+	//     request.open("GET", "http://localhost:5000/users/sign_in")
+	//     request.setRequestHeader("Content-Type", "application/json")
+	//     request.withCredentials = true
+	//     request.onload = () => {
+	//       if(request.status === 200) {
+	//         const receivedUser = JSON.parse(request.responseText)
+	//         this.setUser(receivedUser)
+	//       }else if(request.status === 401){
+	//         this.setState({currentUser: false})
+	//       }
+	//     }
+	//     request.send(null)
+	//   },
+	
+	//   render(){
+	
+	//     let userDiv = <div className="user">
+	//        <h1>None yet ....</h1>
+	//     </div>
+	
+	//     if(this.state.currentUser){
+	//       userDiv = <div className="user">
+	//           <h1>{this.state.currentUser.email}</h1>
+	//       </div>
+	//     } 
+	//     console.log(userDiv)
+	//     return(
+	//       <div>
+	//         {userDiv}
+	//       </div>
+	//     )
+	//   }
+	
+	// })
+	
+	
+	// module.exports = User
 
 /***/ },
 /* 234 */
