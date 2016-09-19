@@ -55,9 +55,10 @@
 	var hashHistory = ReactRouter.hashHistory;
 	
 	var Home = __webpack_require__(222);
-	var User = __webpack_require__(231);
+	var Gallery = __webpack_require__(231);
+	var User = __webpack_require__(233);
 	var Image = __webpack_require__(232);
-	var Main = __webpack_require__(233);
+	var Main = __webpack_require__(234);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -68,24 +69,15 @@
 	      React.createElement(
 	        Route,
 	        { path: '/', component: Main },
-	        React.createElement(IndexRoute, { component: User }),
-	        React.createElement(Route, { path: '/home', component: Home })
+	        React.createElement(IndexRoute, { component: Gallery }),
+	        React.createElement(Route, { path: '/home', component: Home }),
+	        React.createElement(Route, { path: '/users', component: User })
 	      )
 	    );
 	  }
 	});
 	
-	// window.onload = function(){
-	//   ReactDOM.render(
-	//     <h1> hello</h1>,
-	//     document.getElementById('app')
-	//   );
-	// }
-	
-	
 	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
-	
-	// <Route path='/user' component={User} />
 
 /***/ },
 /* 1 */
@@ -25460,7 +25452,14 @@
 	    React.createElement(
 	      Link,
 	      { className: 'user-link', to: '/' },
-	      ' User Page '
+	      ' Front Page '
+	    ),
+	    React.createElement('br', null),
+	    React.createElement(
+	      Link,
+	      { className: 'user-link', to: '/user' },
+	      ' user page ',
+	      ' '
 	    ),
 	    React.createElement(
 	      'h1',
@@ -25489,11 +25488,13 @@
 	    return { currentUser: null };
 	  },
 	  setUser: function setUser(user) {
+	    console.log(user);
 	    this.setState({ currentUser: user, favList: [] });
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
+	    console.log(this.props.url);
 	    var request = new XMLHttpRequest();
 	    request.open("GET", this.props.url + "users.json");
 	    request.setRequestHeader("Content-Type", "application/json");
@@ -25502,6 +25503,7 @@
 	      if (request.status === 200) {
 	        var receivedUser = JSON.parse(request.responseText);
 	        _this.setUser(receivedUser);
+	        console.log(receivedUser);
 	      } else if (request.status === 401) {
 	        _this.setState({ currentUser: false });
 	      }
@@ -25529,7 +25531,7 @@
 	          'h4',
 	          null,
 	          'Welcome ',
-	          this.state.currentUser.email
+	          this.state.currentUser.id
 	        ),
 	        React.createElement(SignOut, { url: this.props.url + "users/sign_out.json",
 	          onSignOut: this.setUser })
@@ -25872,7 +25874,6 @@
 	        password_confirmation: this.state.passwordConfirmation
 	      }
 	    };
-	
 	    request.send(JSON.stringify(data));
 	  },
 	  render: function render() {
@@ -25892,6 +25893,10 @@
 	});
 	
 	module.exports = SignUp;
+	
+	// <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
+	
+	// <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
 
 /***/ },
 /* 230 */
@@ -25944,8 +25949,8 @@
 	var browserHistory = Router.browserHistory;
 	
 	
-	var User = React.createClass({
-	  displayName: 'User',
+	var Gallery = React.createClass({
+	  displayName: 'Gallery',
 	  getInitialState: function getInitialState() {
 	    return { searchQuery: '', images: [] };
 	  },
@@ -25955,32 +25960,21 @@
 	    var url = 'http://localhost:5000/api/images';
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
-	    request.setRequestHeader('Content-Type', "application/json");
-	    request.withCredentials = true;
 	
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
-	        _this.setState({ images: data });
-	      } else {
-	        console.log("Oh dear, you ain't logged in... fool");
-	        browserHistory.goBack();
+	        var data2 = data.reverse();
+	        _this.setState({ images: data2 });
 	      }
 	    };
 	    request.send(null);
 	  },
+	  doSearch: function doSearch(event) {
 	
-	
-	  // doSearch(event){
-	  //   this.setState({searchQuery: event.target.value})
-	  // },
-	
-	
-	  // pu in nav after <link>
-	
-	  // <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
-	
-	
+	    this.setState({ searchQuery: event.target.value });
+	    // console.log(this.state.images[0])
+	  },
 	  render: function render() {
 	    var _this2 = this;
 	
@@ -25999,7 +25993,13 @@
 	          Link,
 	          { className: 'login', to: '/home' },
 	          'Login'
-	        )
+	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'userpage', to: '/users' },
+	          'User'
+	        ),
+	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
 	      React.createElement(
 	        'div',
@@ -26007,14 +26007,14 @@
 	        this.state.images.filter(function (image) {
 	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
 	        }).map(function (image) {
-	          return React.createElement(Image, _extends({}, image, { key: image.title }));
+	          return React.createElement(Image, _extends({}, image, { key: image.id }));
 	        })
 	      )
 	    );
 	  }
 	});
 	
-	module.exports = User;
+	module.exports = Gallery;
 
 /***/ },
 /* 232 */
@@ -26035,17 +26035,20 @@
 	      React.createElement(
 	        'h4',
 	        { className: 'image-title' },
+	        'title: ',
 	        props.title
 	      ),
 	      React.createElement(
 	        'h4',
 	        { className: 'image-credit' },
+	        'reference: ',
 	        props.credit
 	      ),
 	      React.createElement(
 	        'p',
-	        { className: 'image-description' },
-	        props.description
+	        { className: 'image-comment' },
+	        'comment: ',
+	        props.comment
 	      )
 	    )
 	  );
@@ -26060,13 +26063,101 @@
 	  title: string.isRequired,
 	  image: string.isRequired,
 	  credit: string.isRequired,
-	  description: string.isRequired
+	  comment: string.isRequired
 	};
 	
 	module.exports = Image;
 
 /***/ },
 /* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(159);
+	var Image = __webpack_require__(232);
+	var Link = Router.Link;
+	var browserHistory = Router.browserHistory;
+	
+	
+	var Gallery = React.createClass({
+	  displayName: 'Gallery',
+	  getInitialState: function getInitialState() {
+	    return { searchQuery: '', images: [], user_id: '' };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    var url = 'http://localhost:5000/users/[????]';
+	    var request = new XMLHttpRequest();
+	    request.open("GET", url);
+	    request.setRequestHeader('Content-Type', "application/json");
+	    request.withCredentials = true;
+	
+	    request.onload = function () {
+	      if (request.status === 200) {
+	        var data = JSON.parse(request.responseText);
+	        var data2 = data.reverse();
+	        console.log(data2);
+	        _this.setState({ images: data2 });
+	      } else {
+	        console.log("Oh dear, you ain't logged in");
+	        browserHistory.goBack();
+	      }
+	    };
+	    request.send(null);
+	  },
+	  doSearch: function doSearch(event) {
+	    this.setState({ searchQuery: event.target.value });
+	  },
+	
+	
+	  // pu in nav after <link>
+	
+	  // 
+	
+	
+	  render: function render() {
+	    var _this2 = this;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'user' },
+	      React.createElement(
+	        'nav',
+	        null,
+	        React.createElement(
+	          Link,
+	          { className: 'title', to: '/' },
+	          'Bookmarker'
+	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'login', to: '/home' },
+	          'Login'
+	        ),
+	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'images-container' },
+	        this.state.images.filter(function (image) {
+	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
+	        }).map(function (image) {
+	          return React.createElement(Image, _extends({}, image, { key: image.title }));
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Gallery;
+
+/***/ },
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

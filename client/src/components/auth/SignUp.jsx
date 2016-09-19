@@ -25,10 +25,9 @@ const SignUp = React.createClass({
       user: {
         email: this.state.email,
         password: this.state.password,
-        password_confirmation: this.state.passwordConfirmation
+        password_confirmation: this.state.passwordConfirmation,
       }
     }
-
     request.send(JSON.stringify(data))
   },
 
@@ -37,7 +36,7 @@ const SignUp = React.createClass({
       <form className='signup-form'>
       <input type="text" valueLink={this.linkState('email')} placeholder="Email ..."/>
       <input type="password" valueLink={this.linkState('password')} placeholder="password..."/>
-      <input type="password" valueLink={this.linkState('passwordConfirmation')} placeholder=" confirm password..."/>
+      <input type="password" valueLink={this.linkState('passwordConfirmation')} placeholder=" confirm password..."/>  
       <button onClick={this.signUp}> Sign Up </button>
       </form>
       )
@@ -46,3 +45,10 @@ const SignUp = React.createClass({
 })
 
 module.exports = SignUp
+
+
+// <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
+
+// <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
+
+
