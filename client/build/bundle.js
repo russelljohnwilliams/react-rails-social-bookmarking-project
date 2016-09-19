@@ -57,8 +57,9 @@
 	var Home = __webpack_require__(222);
 	var Gallery = __webpack_require__(231);
 	var Users = __webpack_require__(233);
+	var UserProfile = __webpack_require__(235);
 	var Image = __webpack_require__(232);
-	var Main = __webpack_require__(234);
+	var Main = __webpack_require__(236);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -71,7 +72,8 @@
 	        { path: '/', component: Main },
 	        React.createElement(IndexRoute, { component: Gallery }),
 	        React.createElement(Route, { path: '/home', component: Home }),
-	        React.createElement(Route, { path: '/users', component: Users })
+	        React.createElement(Route, { path: '/users', component: Users }),
+	        React.createElement(Route, { path: '/user-profile', component: UserProfile })
 	      )
 	    );
 	  }
@@ -25488,6 +25490,7 @@
 	  },
 	  setUser: function setUser(user) {
 	    this.setState({ currentUser: user });
+	    console.log("currentUser", this.state.currentUser);
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
@@ -25499,7 +25502,7 @@
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var receivedUser = JSON.parse(request.responseText);
-	        console.log('receivedUser', receivedUser);
+	        // console.log('receivedUser' , receivedUser)
 	        _this.setUser(receivedUser);
 	      } else if (request.status === 401) {
 	        _this.setState({ currentUser: false });
@@ -26081,7 +26084,7 @@
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
 	var Image = __webpack_require__(232);
-	var SelectBox = __webpack_require__(235);
+	var SelectBox = __webpack_require__(234);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
 	
@@ -26101,7 +26104,7 @@
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
-	        console.log("DATA", data);
+	        // console.log("DATA", data)
 	        _this.setState({ data: data });
 	      }
 	    };
@@ -26116,14 +26119,7 @@
 	    var index = this.state.data.map(function (e) {
 	      return e.user_name;
 	    }).indexOf(e);
-	    // const index = this.state.images.map(function(e) { return e.user_id; }).indexOf(e);
 	    this.setState({ images: this.state.data[index].image });
-	    // console.log("index", index)
-	    // console.log("state.index", this.state.index)
-	    // console.log("images array:", this.state.data[index].image)
-	
-	
-	    // this.setState({images:this.state.data[e].images})
 	  },
 	
 	  render: function render() {
@@ -26176,33 +26172,6 @@
 	
 	var React = __webpack_require__(1);
 	
-	var Main = function Main(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'container' },
-	    props.children
-	  );
-	};
-	
-	var element = React.PropTypes.element;
-	
-	
-	Main.propTypes = {
-	
-	  children: element.isRequired
-	
-	};
-	
-	module.exports = Main;
-
-/***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
 	var SelectBox = React.createClass({
 	  displayName: 'SelectBox',
 	
@@ -26234,6 +26203,101 @@
 	});
 	
 	module.exports = SelectBox;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var UserProfile = React.createClass({
+	  displayName: "UserProfile",
+	  getInitialState: function getInitialState() {
+	    return { currentUser: null };
+	  },
+	  setUser: function setUser(user) {
+	    this.setState({ currentUser: user });
+	    console.log(this.state.currentUser);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    var request = new XMLHttpRequest();
+	    request.open("GET", "http://localhost:5000/users.json");
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.withCredentials = true;
+	    request.onload = function () {
+	      if (request.status === 200) {
+	        var receivedUser = JSON.parse(request.responseText);
+	        _this.setUser(receivedUser);
+	      } else if (request.status === 401) {
+	        _this.setState({ currentUser: false });
+	      }
+	    };
+	    request.send(null);
+	  },
+	  render: function render() {
+	    var mainDiv = React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "h4",
+	        null,
+	        "Please Sign In/Up"
+	      )
+	    );
+	
+	    if (this.state.currentUser) {
+	      mainDiv = React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "h4",
+	          null,
+	          "Welcome ",
+	          this.state.currentUser.user_name
+	        )
+	      );
+	    }
+	
+	    return React.createElement(
+	      "div",
+	      null,
+	      mainDiv
+	    );
+	  }
+	});
+	
+	module.exports = UserProfile;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Main = function Main(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'container' },
+	    props.children
+	  );
+	};
+	
+	var element = React.PropTypes.element;
+	
+	
+	Main.propTypes = {
+	
+	  children: element.isRequired
+	
+	};
+	
+	module.exports = Main;
 
 /***/ }
 /******/ ]);

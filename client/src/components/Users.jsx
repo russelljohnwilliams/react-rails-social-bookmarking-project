@@ -18,7 +18,7 @@ const Users = React.createClass({
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
-        console.log("DATA", data)
+        // console.log("DATA", data)
         this.setState({data: data})
       }
     }
@@ -30,14 +30,7 @@ const Users = React.createClass({
 
   handleSubmit :function(e){
    const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
-   // const index = this.state.images.map(function(e) { return e.user_id; }).indexOf(e);
    this.setState({images: this.state.data[index].image})
-   // console.log("index", index)
-   // console.log("state.index", this.state.index)
-   // console.log("images array:", this.state.data[index].image)
-
-  
-   // this.setState({images:this.state.data[e].images})
  },
 
 
@@ -59,15 +52,11 @@ const Users = React.createClass({
         <Image { ...image } key={image.id} />
         ))
     }
-
     </div>
     </div>
     )
-
-
 }
 
 })
-
 
 module.exports = Users
