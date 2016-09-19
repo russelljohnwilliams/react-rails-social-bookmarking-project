@@ -1,24 +1,24 @@
 const React = require('react')
 const Router = require('react-router')
 const Image = require('./Image')
+const SelectBox = require('./SelectBox')
 const {Link, browserHistory} = Router
 
 const Users = React.createClass({
 
   getInitialState(){
-    return {searchQuery: '', data:[], images: []}
+    return {searchQuery: '', index: '', data:[], images: []}
   },
 
   componentDidMount(){
-    const url = 'http://localhost:5000/users'
+    const url = 'http://localhost:5000/users/'
     const request = new XMLHttpRequest()
     request.open( "GET", url )
 
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
-
-        console.log("big data", data)
+        console.log("DATA", data)
         this.setState({data: data})
       }
     }
@@ -29,40 +29,43 @@ const Users = React.createClass({
   },
 
   handleSubmit :function(e){
-    console.log(this.state.data[0].user_name)
-    // find location of selected user
-    // set state with index number from users api array
-  },
+   const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
+   // const index = this.state.images.map(function(e) { return e.user_id; }).indexOf(e);
+   this.setState({images: this.state.data[index].image})
+   // console.log("index", index)
+   // console.log("state.index", this.state.index)
+   // console.log("images array:", this.state.data[index].image)
+
+  
+   // this.setState({images:this.state.data[e].images})
+ },
 
 
-  render(){
-    return(
-      <div className="users">
-      <nav>
-      <Link className="title" to='/'>Bookmarker</Link>
-      <Link className="login" to='/home'>Login</Link>
-      <Link className="userpage" to='/users'>User</Link>
+ render(){
+  return(
+    <div className="users">
+    <nav>
+    <Link className="title" to='/'>Bookmarker</Link>
+    <Link className="login" to='/home'>Login</Link>
+    <Link className="userpage" to='/users'>User</Link>
+    <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
+    <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+    </nav>
+    <div className='images-container'>
+    {
+      this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+      .map((image) => (
 
-      <selectBox data={this.state.data} onSubmit={this.handleSubmit}/>
-      
-      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
-      </nav>
-      <div className='images-container'>
+        <Image { ...image } key={image.id} />
+        ))
+    }
 
-      {
-        this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-        .map((image) => (
-
-          <Image { ...image } key={image.id} />
-          ))
-      }
-
-      </div>
-      </div>
-      )
+    </div>
+    </div>
+    )
 
 
-  }
+}
 
 })
 

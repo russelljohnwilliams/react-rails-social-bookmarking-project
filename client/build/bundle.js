@@ -26081,6 +26081,7 @@
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
 	var Image = __webpack_require__(232);
+	var SelectBox = __webpack_require__(235);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
 	
@@ -26088,20 +26089,19 @@
 	var Users = React.createClass({
 	  displayName: 'Users',
 	  getInitialState: function getInitialState() {
-	    return { searchQuery: '', data: [], images: [] };
+	    return { searchQuery: '', index: '', data: [], images: [] };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    var url = 'http://localhost:5000/users';
+	    var url = 'http://localhost:5000/users/';
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
 	
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
-	
-	        console.log("big data", data);
+	        console.log("DATA", data);
 	        _this.setState({ data: data });
 	      }
 	    };
@@ -26113,9 +26113,17 @@
 	
 	
 	  handleSubmit: function handleSubmit(e) {
-	    console.log(this.state.data[0].user_name);
-	    // find location of selected user
-	    // set state with index number from users api array
+	    var index = this.state.data.map(function (e) {
+	      return e.user_name;
+	    }).indexOf(e);
+	    // const index = this.state.images.map(function(e) { return e.user_id; }).indexOf(e);
+	    this.setState({ images: this.state.data[index].image });
+	    // console.log("index", index)
+	    // console.log("state.index", this.state.index)
+	    // console.log("images array:", this.state.data[index].image)
+	
+	
+	    // this.setState({images:this.state.data[e].images})
 	  },
 	
 	  render: function render() {
@@ -26142,7 +26150,7 @@
 	          { className: 'userpage', to: '/users' },
 	          'User'
 	        ),
-	        React.createElement('selectBox', { data: this.state.data, onSubmit: this.handleSubmit }),
+	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit }),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
 	      React.createElement(
@@ -26186,6 +26194,46 @@
 	};
 	
 	module.exports = Main;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var SelectBox = React.createClass({
+	  displayName: 'SelectBox',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return { users: null };
+	  },
+	
+	  handleSelect: function handleSelect(e) {
+	    e.preventDefault();
+	    var attribute = e.target.value;
+	    this.props.onSubmit(attribute);
+	  },
+	
+	  render: function render() {
+	    var users = this.props.data.map(function (user) {
+	      return React.createElement(
+	        'option',
+	        { value: user.user_name, key: user.user_name },
+	        user.user_name
+	      );
+	    }.bind(this));
+	    return React.createElement(
+	      'select',
+	      { value: this.state.users, onChange: this.handleSelect },
+	      users
+	    );
+	  }
+	});
+	
+	module.exports = SelectBox;
 
 /***/ }
 /******/ ]);
