@@ -18,6 +18,7 @@ const Gallery = React.createClass({
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
         const data2 = data.reverse()
+        // console.log("gallery", data2)
         this.setState({images: data2})
         }
       }
@@ -25,12 +26,8 @@ const Gallery = React.createClass({
   },
 
   doSearch(event){
-    
     this.setState({searchQuery: event.target.value})
-    // console.log(this.state.images[0])
   },
-
-
 
   render(){
 
@@ -39,7 +36,7 @@ const Gallery = React.createClass({
         <nav>
           <Link className="title" to='/'>Bookmarker</Link>
           <Link className="login" to='/home'>Login</Link>
-          <Link className="userpage" to='/users'>User</Link>
+          <Link className="userpage" to='/users'>Users</Link>
           <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
         </nav>
         <div className='images-container'>
@@ -50,8 +47,6 @@ const Gallery = React.createClass({
 
               <Image { ...image } key={image.id} />
               ))
-
-
           }
 
         </div>

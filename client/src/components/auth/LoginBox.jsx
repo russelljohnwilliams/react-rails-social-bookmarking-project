@@ -11,7 +11,7 @@ const LoginBox = React.createClass({
   },
 
   setUser(user){
-    this.setState({ currentUser: user, favList: [] })
+    this.setState({ currentUser: user})
   },
 
     componentDidMount(){
@@ -22,8 +22,8 @@ const LoginBox = React.createClass({
       request.onload = () => {
         if(request.status === 200) {
           const receivedUser = JSON.parse(request.responseText)
+          console.log('receivedUser' , receivedUser)
           this.setUser(receivedUser)
-      
 
         }else if(request.status === 401){
           this.setState({currentUser: false})

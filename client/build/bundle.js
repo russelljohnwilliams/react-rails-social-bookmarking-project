@@ -56,7 +56,7 @@
 	
 	var Home = __webpack_require__(222);
 	var Gallery = __webpack_require__(231);
-	var User = __webpack_require__(233);
+	var Users = __webpack_require__(233);
 	var Image = __webpack_require__(232);
 	var Main = __webpack_require__(234);
 	
@@ -71,7 +71,7 @@
 	        { path: '/', component: Main },
 	        React.createElement(IndexRoute, { component: Gallery }),
 	        React.createElement(Route, { path: '/home', component: Home }),
-	        React.createElement(Route, { path: '/users', component: User })
+	        React.createElement(Route, { path: '/users', component: Users })
 	      )
 	    );
 	  }
@@ -25487,7 +25487,7 @@
 	    return { currentUser: null };
 	  },
 	  setUser: function setUser(user) {
-	    this.setState({ currentUser: user, favList: [] });
+	    this.setState({ currentUser: user });
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
@@ -25499,6 +25499,7 @@
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var receivedUser = JSON.parse(request.responseText);
+	        console.log('receivedUser', receivedUser);
 	        _this.setUser(receivedUser);
 	      } else if (request.status === 401) {
 	        _this.setState({ currentUser: false });
@@ -25961,15 +25962,14 @@
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
 	        var data2 = data.reverse();
+	        // console.log("gallery", data2)
 	        _this.setState({ images: data2 });
 	      }
 	    };
 	    request.send(null);
 	  },
 	  doSearch: function doSearch(event) {
-	
 	    this.setState({ searchQuery: event.target.value });
-	    // console.log(this.state.images[0])
 	  },
 	  render: function render() {
 	    var _this2 = this;
@@ -25993,7 +25993,7 @@
 	        React.createElement(
 	          Link,
 	          { className: 'userpage', to: '/users' },
-	          'User'
+	          'Users'
 	        ),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
@@ -26041,6 +26041,12 @@
 	        props.credit
 	      ),
 	      React.createElement(
+	        'h4',
+	        { className: 'posted-by' },
+	        'posted by: ',
+	        props.user_id
+	      ),
+	      React.createElement(
 	        'p',
 	        { className: 'image-comment' },
 	        'comment: ',
@@ -26070,6 +26076,8 @@
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
 	var Image = __webpack_require__(232);
@@ -26077,33 +26085,45 @@
 	var browserHistory = Router.browserHistory;
 	
 	
-	var User = React.createClass({
-	  displayName: 'User',
+	var Users = React.createClass({
+	  displayName: 'Users',
 	  getInitialState: function getInitialState() {
-	    return { searchQuery: '', images: [] };
+	    return { searchQuery: '', data: [], images: [] };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    var url = 'http://localhost:5000/users/1';
+	    var url = 'http://localhost:5000/users';
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
 	
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
-	        var data2 = data.reverse();
-	        console.log("data:", data);
-	        _this.setState({ images: data2 });
+	
+	        console.log("big data", data);
+	        _this.setState({ data: data });
 	      }
 	    };
 	    request.send(null);
 	  },
+	  doSearch: function doSearch(event) {
+	    this.setState({ searchQuery: event.target.value });
+	  },
+	
+	
+	  handleSubmit: function handleSubmit(e) {
+	    console.log(this.state.data[0].user_name);
+	    // find location of selected user
+	    // set state with index number from users api array
+	  },
+	
 	  render: function render() {
+	    var _this2 = this;
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'user' },
+	      { className: 'users' },
 	      React.createElement(
 	        'nav',
 	        null,
@@ -26122,67 +26142,23 @@
 	          { className: 'userpage', to: '/users' },
 	          'User'
 	        ),
+	        React.createElement('selectBox', { data: this.state.data, onSubmit: this.handleSubmit }),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
-	      React.createElement('div', { className: 'images-container' })
+	      React.createElement(
+	        'div',
+	        { className: 'images-container' },
+	        this.state.images.filter(function (image) {
+	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
+	        }).map(function (image) {
+	          return React.createElement(Image, _extends({}, image, { key: image.id }));
+	        })
+	      )
 	    );
 	  }
 	});
 	
-	module.exports = User;
-	
-	// const React = require('react')
-	
-	
-	// const User = React.createClass({
-	
-	//   getInitialState(){
-	//     return {currentUser: null}
-	//   },
-	
-	//   setUser(user){
-	//     this.setState({ currentUser: user })
-	//   },
-	
-	//   componentDidMount(){
-	//     const request = new XMLHttpRequest()
-	//     request.open("GET", "http://localhost:5000/users/sign_in")
-	//     request.setRequestHeader("Content-Type", "application/json")
-	//     request.withCredentials = true
-	//     request.onload = () => {
-	//       if(request.status === 200) {
-	//         const receivedUser = JSON.parse(request.responseText)
-	//         this.setUser(receivedUser)
-	//       }else if(request.status === 401){
-	//         this.setState({currentUser: false})
-	//       }
-	//     }
-	//     request.send(null)
-	//   },
-	
-	//   render(){
-	
-	//     let userDiv = <div className="user">
-	//        <h1>None yet ....</h1>
-	//     </div>
-	
-	//     if(this.state.currentUser){
-	//       userDiv = <div className="user">
-	//           <h1>{this.state.currentUser.email}</h1>
-	//       </div>
-	//     } 
-	//     console.log(userDiv)
-	//     return(
-	//       <div>
-	//         {userDiv}
-	//       </div>
-	//     )
-	//   }
-	
-	// })
-	
-	
-	// module.exports = User
+	module.exports = Users;
 
 /***/ },
 /* 234 */
