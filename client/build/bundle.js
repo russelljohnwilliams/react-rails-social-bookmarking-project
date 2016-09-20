@@ -25952,7 +25952,7 @@
 	var Gallery = React.createClass({
 	  displayName: 'Gallery',
 	  getInitialState: function getInitialState() {
-	    return { searchQuery: '', images: [] };
+	    return { searchQuery: '', images: [], image: '' };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
@@ -25967,6 +25967,8 @@
 	        var data2 = data.reverse();
 	        // console.log("gallery", data2)
 	        _this.setState({ images: data2 });
+	        _this.setState({ image: _this.state.images[4].image });
+	        console.log("yey", _this.state.image);
 	      }
 	    };
 	    request.send(null);
@@ -25988,16 +25990,19 @@
 	          { className: 'title', to: '/' },
 	          'Bookmarker'
 	        ),
+	        React.createElement('br', null),
 	        React.createElement(
 	          Link,
 	          { className: 'login', to: '/home' },
 	          'Login'
 	        ),
+	        React.createElement('br', null),
 	        React.createElement(
 	          Link,
 	          { className: 'userpage', to: '/users' },
 	          'Users'
 	        ),
+	        React.createElement('br', null),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
 	      React.createElement(
@@ -26012,6 +26017,7 @@
 	    );
 	  }
 	});
+	// <img src={this.state.images[0].image} key={this.state.images[0].image}/>
 	
 	module.exports = Gallery;
 
@@ -26026,35 +26032,24 @@
 	var Image = function Image(props) {
 	  return React.createElement(
 	    'div',
-	    { className: 'image' },
-	    React.createElement('img', { src: props.image, className: 'image-image' }),
+	    { className: 'image-details' },
+	    React.createElement('img', { src: props.image, className: 'the-image' }),
 	    React.createElement(
-	      'div',
-	      { className: 'image-details' },
-	      React.createElement(
-	        'h4',
-	        { className: 'image-title' },
-	        'title: ',
-	        props.title
-	      ),
-	      React.createElement(
-	        'h4',
-	        { className: 'image-credit' },
-	        'reference: ',
-	        props.credit
-	      ),
-	      React.createElement(
-	        'h4',
-	        { className: 'posted-by' },
-	        'posted by: ',
-	        props.user_id
-	      ),
-	      React.createElement(
-	        'p',
-	        { className: 'image-comment' },
-	        'comment: ',
-	        props.comment
-	      )
+	      'h3',
+	      { className: 'image-title' },
+	      props.title
+	    ),
+	    React.createElement(
+	      'h4',
+	      { className: 'image-credit' },
+	      'Series (',
+	      props.user.user_name,
+	      ')'
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image_comment' },
+	      props.comment
 	    )
 	  );
 	};
@@ -26104,7 +26099,7 @@
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var data = JSON.parse(request.responseText);
-	        // console.log("DATA", data)
+	        console.log("DATA", data);
 	        _this.setState({ data: data });
 	      }
 	    };
@@ -26218,16 +26213,20 @@
 	    return { currentUser: null };
 	  },
 	  setUser: function setUser(user) {
+	    console.log(user);
 	    this.setState({ currentUser: user });
-	    console.log(this.state.currentUser);
 	  },
-	  componentDidMount: function componentDidMount() {
+	
+	
+	  fetchUser: function fetchUser() {
 	    var _this = this;
 	
+	    console.log("fetching user...");
 	    var request = new XMLHttpRequest();
-	    request.open("GET", "http://localhost:5000/users.json");
+	    request.open("GET", "http://localhost:5000/users_all.json");
 	    request.setRequestHeader("Content-Type", "application/json");
 	    request.withCredentials = true;
+	
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var receivedUser = JSON.parse(request.responseText);
@@ -26238,6 +26237,10 @@
 	    };
 	    request.send(null);
 	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    this.fetchUser();
+	  },
 	  render: function render() {
 	    var mainDiv = React.createElement(
 	      "div",
@@ -26245,10 +26248,9 @@
 	      React.createElement(
 	        "h4",
 	        null,
-	        "Please Sign In/Up"
+	        "Please Sign In"
 	      )
 	    );
-	
 	    if (this.state.currentUser) {
 	      mainDiv = React.createElement(
 	        "div",
@@ -26258,7 +26260,9 @@
 	          null,
 	          "Welcome ",
 	          this.state.currentUser.user_name
-	        )
+	        ),
+	        "create an image link form here!!!",
+	        React.createElement(CreateImage, { data: this.state.currentUser })
 	      );
 	    }
 	

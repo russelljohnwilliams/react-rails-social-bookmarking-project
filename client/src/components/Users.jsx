@@ -18,12 +18,13 @@ const Users = React.createClass({
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
-        // console.log("DATA", data)
+        console.log("DATA", data)
         this.setState({data: data})
       }
     }
     request.send( null )
   },
+
   doSearch(event){
     this.setState({searchQuery: event.target.value})
   },

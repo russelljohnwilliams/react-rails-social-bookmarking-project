@@ -2,11 +2,11 @@ const React = require('react')
 const Router = require('react-router')
 const Image = require('./Image')
 const {Link, browserHistory} = Router
- 
+
 const Gallery = React.createClass({
 
   getInitialState(){
-    return {searchQuery: '', images: []}
+    return {searchQuery: '', images: [], image: ''}
   },
 
   componentDidMount(){
@@ -20,9 +20,11 @@ const Gallery = React.createClass({
         const data2 = data.reverse()
         // console.log("gallery", data2)
         this.setState({images: data2})
-        }
+        this.setState({image: this.state.images[4].image})
+        console.log("yey", this.state.image)
       }
-      request.send( null )
+    }
+    request.send( null )
   },
 
   doSearch(event){
@@ -33,28 +35,32 @@ const Gallery = React.createClass({
 
     return(
       <div className="user">
-        <nav>
-          <Link className="title" to='/'>Bookmarker</Link>
-          <Link className="login" to='/home'>Login</Link>
-          <Link className="userpage" to='/users'>Users</Link>
-          <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
-        </nav>
-        <div className='images-container'>
-          
-          {
-            this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-              .map((image) => (
+      <nav>
+      <Link className="title" to='/'>Bookmarker</Link><br/>
+      <Link className="login" to='/home'>Login</Link><br/>
+      <Link className="userpage" to='/users'>Users</Link><br/>
 
-              <Image { ...image } key={image.id} />
-              ))
-          }
+      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+      </nav>
 
-        </div>
+      <div className='images-container'>
+
+      {
+        this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+        .map((image) => (
+
+          <Image { ...image } key={image.id} />
+
+          ))
+      }
+
+      </div>
+      
       </div>
       )
   }
 
 })
-
+// <img src={this.state.images[0].image} key={this.state.images[0].image}/>
 
 module.exports = Gallery
