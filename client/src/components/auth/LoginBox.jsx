@@ -23,7 +23,6 @@ const LoginBox = React.createClass({
       request.onload = () => {
         if(request.status === 200) {
           const receivedUser = JSON.parse(request.responseText)
-          // console.log('receivedUser' , receivedUser)
           this.setUser(receivedUser)
 
         }else if(request.status === 401){

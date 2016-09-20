@@ -1,6 +1,6 @@
 const React = require('react')
 const Router = require('react-router')
-const Image = require('./Image')
+const Image = require('../Image')
 const SelectBox = require('./SelectBox')
 const {Link, browserHistory} = Router
 
