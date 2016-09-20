@@ -1,16 +1,17 @@
 const React = require('react')
-
+const {Link} =require('react-router')
 
 
 const Image = (props) => (
   <div className='image-details'>
   <img src={props.image} className='the-image'/>
   <br/>
-  <h3 className='image-title'>{props.title}</h3>
-  <p className='image-credit'>linked from: {props.credit}</p>
+  <p className='image-title'>{props.title}</p>
+  <link className="image-link" href={props.credit}>link</link>
+  
   <p className='image_comment'>comoment: {props.comment}</p>
   </div>
-     )
+  )
 
 
 const { string, number } = React.PropTypes

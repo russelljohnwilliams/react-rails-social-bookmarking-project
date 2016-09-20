@@ -1,6 +1,7 @@
 const React = require('react')
 const CreateImageForm = require('./CreateImageForm')
-
+const Router = require('react-router')
+const {Link, browserHistory} = Router
 
 const UserProfile = React.createClass({
 
@@ -34,9 +35,11 @@ const UserProfile = React.createClass({
   },
 
   render(){
+
     let mainDiv = <div>
+
     <h4>Please Sign In</h4>
-  
+
     </div>
     if(this.state.currentUser){
       mainDiv = <div>
@@ -47,15 +50,23 @@ const UserProfile = React.createClass({
 
       </div>}
 
-    return(
-      <div>
-      {mainDiv}
-      </div>
-    )
+      return(
 
-  }
+        <div>
+        <nav>
+        <Link className="title" to='/'>BOOKMARKER </Link>
+              <Link className="login" to='/home'>LOGIN </Link>
+              <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
+              <Link className="userprofile" to='/userprofile'>USER</Link><br/>
 
-})
+        </nav>
+        {mainDiv}
+        </div>
+        )
+
+    }
+
+  })
 
 
 module.exports = UserProfile

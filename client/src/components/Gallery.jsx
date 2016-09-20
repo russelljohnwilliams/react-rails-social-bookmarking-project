@@ -34,10 +34,10 @@ const Gallery = React.createClass({
     return(
       <div className="user">
       <nav>
-      <Link className="title" to='/'>bookmarker</Link><br/>
-      <Link className="login" to='/home'>login</Link><br/>
-      <Link className="userspage" to='/users'>users</Link><br/>
-      <Link className="userprofile" to='/userprofile'>user profile</Link><br/>
+      <Link className="title" to='/'>BOOKMARKER </Link>
+      <Link className="login" to='/home'>LOGIN </Link>
+      <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
+      <Link className="userprofile" to='/userprofile'>USER</Link><br/>
       
 
       <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />

@@ -5,16 +5,18 @@ const {Link} =require('react-router')
 const Home = () => (
 
   <div className="home">
-    <h1 className="title">Bookmarker</h1>
-    
-    <LoginBox url="http://localhost:5000/" />
+  <nav>
+  <Link className="title" to='/'>BOOKMARKER </Link>
+  <Link className="login" to='/home'>LOGIN </Link>
+  <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
+  <Link className="userprofile" to='/userprofile'>USER</Link><br/>
+  </nav>
 
-    <Link className="user-link" to='/'> Front Page </Link><br/>
-    <Link className="user-link" to='/users'> user page </Link>
-   <h1>Home bit</h1>
+  
+  <LoginBox url="http://localhost:5000/" />
   </div>
 
-)
+  )
 
 
 module.exports = Home

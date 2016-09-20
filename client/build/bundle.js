@@ -25446,27 +25446,31 @@
 	    'div',
 	    { className: 'home' },
 	    React.createElement(
-	      'h1',
-	      { className: 'title' },
-	      'Bookmarker'
-	    ),
-	    React.createElement(LoginBox, { url: 'http://localhost:5000/' }),
-	    React.createElement(
-	      Link,
-	      { className: 'user-link', to: '/' },
-	      ' Front Page '
-	    ),
-	    React.createElement('br', null),
-	    React.createElement(
-	      Link,
-	      { className: 'user-link', to: '/users' },
-	      ' user page '
-	    ),
-	    React.createElement(
-	      'h1',
+	      'nav',
 	      null,
-	      'Home bit'
-	    )
+	      React.createElement(
+	        Link,
+	        { className: 'title', to: '/' },
+	        'BOOKMARKER '
+	      ),
+	      React.createElement(
+	        Link,
+	        { className: 'login', to: '/home' },
+	        'LOGIN '
+	      ),
+	      React.createElement(
+	        Link,
+	        { className: 'userspage', to: '/users' },
+	        'CONTRIBUTORS '
+	      ),
+	      React.createElement(
+	        Link,
+	        { className: 'userprofile', to: '/userprofile' },
+	        'USER'
+	      ),
+	      React.createElement('br', null)
+	    ),
+	    React.createElement(LoginBox, { url: 'http://localhost:5000/' })
 	  );
 	};
 	
@@ -25981,25 +25985,22 @@
 	        React.createElement(
 	          Link,
 	          { className: 'title', to: '/' },
-	          'bookmarker'
+	          'BOOKMARKER '
 	        ),
-	        React.createElement('br', null),
 	        React.createElement(
 	          Link,
 	          { className: 'login', to: '/home' },
-	          'login'
+	          'LOGIN '
 	        ),
-	        React.createElement('br', null),
 	        React.createElement(
 	          Link,
 	          { className: 'userspage', to: '/users' },
-	          'users'
+	          'CONTRIBUTORS '
 	        ),
-	        React.createElement('br', null),
 	        React.createElement(
 	          Link,
 	          { className: 'userprofile', to: '/userprofile' },
-	          'user profile'
+	          'USER'
 	        ),
 	        React.createElement('br', null),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
@@ -26028,6 +26029,11 @@
 	
 	var React = __webpack_require__(1);
 	
+	var _require = __webpack_require__(159);
+	
+	var Link = _require.Link;
+	
+	
 	var Image = function Image(props) {
 	  return React.createElement(
 	    'div',
@@ -26035,15 +26041,14 @@
 	    React.createElement('img', { src: props.image, className: 'the-image' }),
 	    React.createElement('br', null),
 	    React.createElement(
-	      'h3',
+	      'p',
 	      { className: 'image-title' },
 	      props.title
 	    ),
 	    React.createElement(
-	      'p',
-	      { className: 'image-credit' },
-	      'linked from: ',
-	      props.credit
+	      'link',
+	      { className: 'image-link', href: props.credit },
+	      'link'
 	    ),
 	    React.createElement(
 	      'p',
@@ -26130,18 +26135,24 @@
 	        React.createElement(
 	          Link,
 	          { className: 'title', to: '/' },
-	          'Bookmarker'
+	          'BOOKMARKER '
 	        ),
 	        React.createElement(
 	          Link,
 	          { className: 'login', to: '/home' },
-	          'Login'
+	          'LOGIN '
 	        ),
 	        React.createElement(
 	          Link,
-	          { className: 'userpage', to: '/users' },
-	          'User'
+	          { className: 'userspage', to: '/users' },
+	          'CONTRIBUTORS '
 	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'userprofile', to: '/userprofile' },
+	          'USER'
+	        ),
+	        React.createElement('br', null),
 	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit }),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
@@ -26208,6 +26219,10 @@
 	
 	var React = __webpack_require__(1);
 	var CreateImageForm = __webpack_require__(236);
+	var Router = __webpack_require__(159);
+	var Link = Router.Link;
+	var browserHistory = Router.browserHistory;
+	
 	
 	var UserProfile = React.createClass({
 	  displayName: 'UserProfile',
@@ -26242,6 +26257,7 @@
 	    this.fetchUser();
 	  },
 	  render: function render() {
+	
 	    var mainDiv = React.createElement(
 	      'div',
 	      null,
@@ -26269,6 +26285,31 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'nav',
+	        null,
+	        React.createElement(
+	          Link,
+	          { className: 'title', to: '/' },
+	          'BOOKMARKER '
+	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'login', to: '/home' },
+	          'LOGIN '
+	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'userspage', to: '/users' },
+	          'CONTRIBUTORS '
+	        ),
+	        React.createElement(
+	          Link,
+	          { className: 'userprofile', to: '/userprofile' },
+	          'USER'
+	        ),
+	        React.createElement('br', null)
+	      ),
 	      mainDiv
 	    );
 	  }

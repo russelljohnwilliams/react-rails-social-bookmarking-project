@@ -1,25 +1,75 @@
+html{
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+}
 body{
-  background: grey;
+  background: #f0f5f9;
+  color: #444f59;
+
 }
 .the-image{
   padding: 0;
   margin: 5;
-  max-width: 40vw;
-  border-radius: 1%;
+  width: 30vw;
+  /*border-radius: 1%;*/
   border: 1px solid black;
 }
 
+.search-box{
+  float: right;
+  width: 15vw;
+  height: 2vw;
+  border: 0
+
+}
+
+input:focus {
+    outline:none;
+}
 
 .similar-images{
   width: 200px;
 }
 
 .image-details{
-  float: left;
-  max-width: 40vw;
+
+  width: 30vw;
   padding: 10px;
-  border: 1px solid grey;
+  border: 0;
   margin: 10px;
+  margin-left: 10vw;
+  margin-top: 3vw;
   background: white;
-  border-radius: 1.5%;
+  /*border-radius: 1.5%;*/
 }
+
+
+/*==================
+    LINKS
+    ===================*/
+
+    p, h1, link{
+      border: 0;
+      padding: 0;
+    }
+
+    a{ 
+      font-family: 'Anton', sans-serif;
+      font-size: 6.5vw;
+      padding:0;
+      margin: 0;
+      border:0;
+    }
+
+    a:link, :visited, :active {
+      text-decoration: none;
+      color: #444f59
+    }
+
+    
+
+    a:hover {
+      color: black  ;
+      text-decoration: none;
+    }
+

@@ -31,33 +31,35 @@ const Users = React.createClass({
 
   handleSubmit :function(e){
     console.log("e:", e.user_name)
-   const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
-   this.setState({images: this.state.data[index].image})
- },
+    const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
+    this.setState({images: this.state.data[index].image})
+  },
 
 
- render(){
-  return(
-    <div className="users">
-    <nav>
-    <Link className="title" to='/'>Bookmarker</Link>
-    <Link className="login" to='/home'>Login</Link>
-    <Link className="userpage" to='/users'>User</Link>
-    <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
-    <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
-    </nav>
-    <div className='images-container'>
-    {
-      this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-      .map((image) => (
+  render(){
+    return(
+      <div className="users">
+      <nav>
+      <Link className="title" to='/'>BOOKMARKER </Link>
+      <Link className="login" to='/home'>LOGIN </Link>
+      <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
+      <Link className="userprofile" to='/userprofile'>USER</Link><br/>
+      
+      <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
+      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+      </nav>
+      <div className='images-container'>
+      {
+        this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+        .map((image) => (
 
-        <Image { ...image } key={image.id} />
-        ))
-    }
-    </div>
-    </div>
-    )
-}
+          <Image { ...image } key={image.id} />
+          ))
+      }
+      </div>
+      </div>
+      )
+  }
 
 })
 
