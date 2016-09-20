@@ -57,9 +57,9 @@
 	var Home = __webpack_require__(222);
 	var Gallery = __webpack_require__(231);
 	var Users = __webpack_require__(233);
-	var UserProfile = __webpack_require__(237);
+	var UserProfile = __webpack_require__(235);
 	var Image = __webpack_require__(232);
-	var Main = __webpack_require__(236);
+	var Main = __webpack_require__(237);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -25571,6 +25571,7 @@
 	    request.open("POST", this.props.url);
 	    request.setRequestHeader("Content-Type", "application/json");
 	    request.withCredentials = true;
+	
 	    request.onload = function () {
 	      if (request.status === 201) {
 	        var user = JSON.parse(request.responseText);
@@ -26101,7 +26102,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    var url = 'http://localhost:5000/users/';
+	    var url = 'http://localhost:5000/all_users';
 	    var request = new XMLHttpRequest();
 	    request.open("GET", url);
 	
@@ -26209,41 +26210,13 @@
 	module.exports = SelectBox;
 
 /***/ },
-/* 235 */,
-/* 236 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	
-	var Main = function Main(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'container' },
-	    props.children
-	  );
-	};
-	
-	var element = React.PropTypes.element;
-	
-	
-	Main.propTypes = {
-	
-	  children: element.isRequired
-	
-	};
-	
-	module.exports = Main;
-
-/***/ },
-/* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var CreateImageForm = __webpack_require__(238);
+	var CreateImageForm = __webpack_require__(236);
 	
 	var UserProfile = React.createClass({
 	  displayName: 'UserProfile',
@@ -26313,7 +26286,7 @@
 	module.exports = UserProfile;
 
 /***/ },
-/* 238 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26321,18 +26294,16 @@
 	var React = __webpack_require__(1);
 	var LinkedStateMixin = __webpack_require__(225);
 	
-	var SignUp = React.createClass({
-	  displayName: 'SignUp',
+	var CreateImageForm = React.createClass({
+	  displayName: 'CreateImageForm',
 	
 	
 	  mixins: [LinkedStateMixin],
 	
 	  getInitialState: function getInitialState() {
-	    return { title: '', credit: '', image: '', comment: '' };
+	    return { title: '', image: '', credit: '', comment: '' };
 	  },
 	  signUp: function signUp() {
-	    var _this = this;
-	
 	    var request = new XMLHttpRequest();
 	    request.open("POST", "http://localhost:5000/api/images");
 	    request.setRequestHeader("Content-Type", "application/json");
@@ -26340,15 +26311,13 @@
 	    request.onload = function () {
 	      if (request.status === 201) {
 	        var user = JSON.parse(request.responseText);
-	        _this.props.onSignUp(user);
 	      }
 	    };
-	
 	    var data = {
 	      user: {
 	        title: this.state.title,
-	        credit: this.state.credit,
 	        image: this.state.image,
+	        credit: this.state.credit,
 	        comment: this.state.comment,
 	        user_id: this.props.user_id
 	      }
@@ -26360,8 +26329,8 @@
 	      'form',
 	      { className: 'signup-form' },
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('title'), placeholder: 'add title' }),
-	      React.createElement('input', { type: 'text', valueLink: this.linkState('credit'), placeholder: 'add reference' }),
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('image'), placeholder: 'image link' }),
+	      React.createElement('input', { type: 'text', valueLink: this.linkState('credit'), placeholder: 'add reference' }),
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('comment'), placeholder: 'add comment' }),
 	      React.createElement(
 	        'button',
@@ -26372,106 +26341,133 @@
 	  }
 	});
 	
-	module.exports = SignUp;
+	module.exports = CreateImageForm;
 	
-	// <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
+	// // <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
 	
-	// <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
-	
-	
-	// const React = require('react')
-	
-	// var React = require('react')
-	
-	// var CreateImageForm = React.createClass({
+	// // <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
 	
 	
-	//   getInitialState: function(){
-	//     return{title: '', credit: '', link: '', comment: '', user_id: ''}
-	//   },
+	// // const React = require('react')
 	
-	//   handleTitleChange: function(e){
-	//     this.setState({title: e.target.value})
-	//   },
+	// // var React = require('react')
 	
-	//   handleCreditChange: function(e){
-	//     this.setState({credit: e.target.value})
-	//   },
+	// // var CreateImageForm = React.createClass({
 	
 	
-	//   handleLinkChange: function(e){
-	//     this.setState({link: e.target.value})
-	//   },
+	// //   getInitialState: function(){
+	// //     return{title: '', credit: '', link: '', comment: '', user_id: ''}
+	// //   },
+	
+	// //   handleTitleChange: function(e){
+	// //     this.setState({title: e.target.value})
+	// //   },
+	
+	// //   handleCreditChange: function(e){
+	// //     this.setState({credit: e.target.value})
+	// //   },
 	
 	
-	//   handleCommentChange: function(e){
-	//     this.setState({comment: e.target.value})
-	//   },
-	
-	//   setUserId: function(){
-	//     console.log("id", this.props.user_id)
-	// this.setState({user_id: this.props.user_id})
-	// }
+	// //   handleLinkChange: function(e){
+	// //     this.setState({link: e.target.value})
+	// //   },
 	
 	
-	// handleSubmit: function(e){
-	//   e.preventDefault()
+	// //   handleCommentChange: function(e){
+	// //     this.setState({comment: e.target.value})
+	// //   },
 	
-	// signUp(){
-	//   const request = new XMLHttpRequest()
-	//   request.open("POST", this.props.url)
-	//   request.setRequestHeader("Content-Type", "application/json")
-	//   request.withCredentials = true
-	//   request.onload = () => {
-	//     if(request.status === 201){
-	//       const user = JSON.parse(request.responseText)
-	//       this.props.onSignUp(user)
-	//     }
-	//   }
-	
-	// var author = this.state.author.trim()
-	// var text = this.state.text.trim()
-	// if( !text || !author ){
-	//   return;
-	// }
-	// this.props.handleCommentSubmit({author: author, text: text})
-	// this.setState({author:'', text:''})
-	// },
+	// //   setUserId: function(){
+	// //     console.log("id", this.props.user_id)
+	//     // this.setState({user_id: this.props.user_id})
+	//   // }
 	
 	
-	// render: function(){
-	//   return(
-	//     <form className='comment-form' onSubmit={this.signUp}>
+	//   // handleSubmit: function(e){
+	//   //   e.preventDefault()
 	
-	//     <input type="text" placeholder='Give your image a title' 
-	//     value={this.state.title}
-	//     onChange={this.handleTitleChange}
-	//     />
+	//     // signUp(){
+	//     //   const request = new XMLHttpRequest()
+	//     //   request.open("POST", this.props.url)
+	//     //   request.setRequestHeader("Content-Type", "application/json")
+	//     //   request.withCredentials = true
+	//     //   request.onload = () => {
+	//     //     if(request.status === 201){
+	//     //       const user = JSON.parse(request.responseText)
+	//     //       this.props.onSignUp(user)
+	//     //     }
+	//     //   }
 	
-	//     <input type="text" placeholder='Credit the site you referenced,' 
-	//     value={this.state.credit}
-	//     onChange={this.handleCreditChange}
-	//     />
+	//     // var author = this.state.author.trim()
+	//     // var text = this.state.text.trim()
+	//     // if( !text || !author ){
+	//     //   return;
+	//     // }
+	//     // this.props.handleCommentSubmit({author: author, text: text})
+	//     // this.setState({author:'', text:''})
+	//   // },
 	
-	//     <input type="text" placeholder='Image link' 
-	//     value={this.state.link}
-	//     onChange={this.handleLinkChange}
-	//     />
 	
-	//     <input type="text" placeholder="Add a comment..." 
-	//     value={this.state.comment}
-	//     onChange={this.handleCommentChange}
-	//     />
+	//   // render: function(){
+	//   //   return(
+	//   //     <form className='comment-form' onSubmit={this.signUp}>
 	
-	//     <input type="submit" value="Enter Comment" />
-	//     </form>
+	//   //     <input type="text" placeholder='Give your image a title' 
+	//   //     value={this.state.title}
+	//   //     onChange={this.handleTitleChange}
+	//   //     />
 	
-	//     )
-	// }
+	//   //     <input type="text" placeholder='Credit the site you referenced,' 
+	//   //     value={this.state.credit}
+	//   //     onChange={this.handleCreditChange}
+	//   //     />
 	
-	// })
+	//   //     <input type="text" placeholder='Image link' 
+	//   //     value={this.state.link}
+	//   //     onChange={this.handleLinkChange}
+	//   //     />
 	
-	// module.exports = CreateImageForm
+	//   //     <input type="text" placeholder="Add a comment..." 
+	//   //     value={this.state.comment}
+	//   //     onChange={this.handleCommentChange}
+	//   //     />
+	
+	//   //     <input type="submit" value="Enter Comment" />
+	//   //     </form>
+	
+	//   //     )
+	//   // }
+	
+	// // })
+	
+	// // module.exports = CreateImageForm
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Main = function Main(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'container' },
+	    props.children
+	  );
+	};
+	
+	var element = React.PropTypes.element;
+	
+	
+	Main.propTypes = {
+	
+	  children: element.isRequired
+	
+	};
+	
+	module.exports = Main;
 
 /***/ }
 /******/ ]);

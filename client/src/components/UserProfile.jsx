@@ -42,7 +42,6 @@ const UserProfile = React.createClass({
       mainDiv = <div>
       <h4>Welcome {this.state.currentUser.user_name}</h4>
 
-
       <CreateImageForm />
       create an image link form here!!!
 

@@ -11,7 +11,7 @@ const Users = React.createClass({
   },
 
   componentDidMount(){
-    const url = 'http://localhost:5000/users/'
+    const url = 'http://localhost:5000/all_users'
     const request = new XMLHttpRequest()
     request.open( "GET", url )
 

@@ -14,6 +14,7 @@ const SignIn = React.createClass({
     request.open("POST", this.props.url)
     request.setRequestHeader("Content-Type", "application/json")
     request.withCredentials = true
+    
     request.onload = () => {
       if(request.status === 201){
         const user = JSON.parse(request.responseText)
