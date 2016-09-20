@@ -56,9 +56,9 @@
 	
 	var Home = __webpack_require__(222);
 	var Gallery = __webpack_require__(231);
-	var User = __webpack_require__(233);
+	var User = __webpack_require__(238);
 	var Image = __webpack_require__(232);
-	var Main = __webpack_require__(234);
+	var Main = __webpack_require__(237);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -26065,7 +26065,38 @@
 	module.exports = Image;
 
 /***/ },
-/* 233 */
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Main = function Main(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'container' },
+	    props.children
+	  );
+	};
+	
+	var element = React.PropTypes.element;
+	
+	
+	Main.propTypes = {
+	
+	  children: element.isRequired
+	
+	};
+	
+	module.exports = Main;
+
+/***/ },
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26183,33 +26214,6 @@
 	
 	
 	// module.exports = User
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Main = function Main(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'container' },
-	    props.children
-	  );
-	};
-	
-	var element = React.PropTypes.element;
-	
-	
-	Main.propTypes = {
-	
-	  children: element.isRequired
-	
-	};
-	
-	module.exports = Main;
 
 /***/ }
 /******/ ]);
