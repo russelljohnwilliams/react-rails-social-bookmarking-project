@@ -4,7 +4,8 @@ const ReactRouter = require('react-router')
 const {Router, Route, IndexRoute, hashHistory} = ReactRouter
 const Home = require('./components/Home')
 const Gallery = require('./components/Gallery')
-const User = require('./components/User')
+const Users = require('./components/user/Users')
+const UserProfile = require('./components/UserProfile')
 const Image = require('./components/Image')
 const Main = require('./components/Main')
 
@@ -15,7 +16,8 @@ const App = React.createClass({
           <Route path='/' component={Main}>
             <IndexRoute component={Gallery} />
             <Route path='/home' component={Home} />
-            <Route path='/users' component={User} />
+            <Route path='/users' component={Users} />
+            <Route path='/userprofile' component={UserProfile} />
           </Route>
          </Router>
         )

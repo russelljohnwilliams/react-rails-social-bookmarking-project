@@ -1,25 +1,25 @@
 const React = require('react')
 const Router = require('react-router')
-const Image = require('./Image')
+const Image = require('../Image')
+const SelectBox = require('./SelectBox')
 const {Link, browserHistory} = Router
 
-const Gallery = React.createClass({
+const Users = React.createClass({
 
   getInitialState(){
-    return {searchQuery: '', images: [], image: ''}
+    return {searchQuery: '', index: '', data:[], images: []}
   },
 
   componentDidMount(){
-    const url = 'http://localhost:5000/api/images'
+    const url = 'http://localhost:5000/all_users'
     const request = new XMLHttpRequest()
     request.open( "GET", url )
 
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
-        const data2 = data.reverse()
-        this.setState({images: data2})
-        this.setState({image: this.state.images[4].image})
+        console.log("DATA", data)
+        this.setState({data: data})
       }
     }
     request.send( null )
@@ -29,38 +29,38 @@ const Gallery = React.createClass({
     this.setState({searchQuery: event.target.value})
   },
 
-  render(){
+  handleSubmit :function(e){
+    console.log("e:", e.user_name)
+    const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
+    this.setState({images: this.state.data[index].image})
+  },
 
+
+  render(){
     return(
-      <div className="user">
+      <div className="users">
       <nav>
       <Link className="title" to='/'>BOOKMARKER </Link>
       <Link className="login" to='/home'>LOGIN </Link>
       <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
       <Link className="userprofile" to='/userprofile'>USER</Link><br/>
       
-
+      <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
       <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
       </nav>
-
       <div className='images-container'>
-
       {
         this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
         .map((image) => (
 
           <Image { ...image } key={image.id} />
-
           ))
       }
-
       </div>
-      
       </div>
       )
   }
 
 })
-// <img src={this.state.images[0].image} key={this.state.images[0].image}/>
 
-module.exports = Gallery
+module.exports = Users

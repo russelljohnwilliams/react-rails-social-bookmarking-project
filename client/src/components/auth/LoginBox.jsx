@@ -11,26 +11,26 @@ const LoginBox = React.createClass({
   },
 
   setUser(user){
-    this.setState({ currentUser: user, favList: [] })
+    this.setState({ currentUser: user})
+    console.log("currentUser", this.state.currentUser)
   },
 
-    componentDidMount(){
-      const request = new XMLHttpRequest()
-      request.open("GET", this.props.url + "users.json")
-      request.setRequestHeader("Content-Type", "application/json")
-      request.withCredentials = true
-      request.onload = () => {
-        if(request.status === 200) {
-          const receivedUser = JSON.parse(request.responseText)
-          this.setUser(receivedUser)
-      
+  componentDidMount(){
+    const request = new XMLHttpRequest()
+    request.open("GET", this.props.url + "users.json")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.withCredentials = true
+    request.onload = () => {
+      if(request.status === 200) {
+        const receivedUser = JSON.parse(request.responseText)
+        this.setUser(receivedUser)
 
-        }else if(request.status === 401){
-          this.setState({currentUser: false})
-        }
+      }else if(request.status === 401){
+        this.setState({currentUser: false})
       }
-      request.send(null)
-    },
+    }
+    request.send(null)
+  },
 
   render(){
     let mainDiv = <div>
