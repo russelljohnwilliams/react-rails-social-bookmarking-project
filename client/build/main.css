@@ -1,10 +1,11 @@
 html{
   text-decoration: none;
   font-family: 'Raleway', sans-serif;
+  font-size: 0.8em;
 }
 body{
   background: #f0f5f9;
-  color: #444f59;
+  color: #929ca5;
 
 }
 .the-image{
@@ -12,10 +13,11 @@ body{
   margin: 5;
   width: 30vw;
   /*border-radius: 1%;*/
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 
 .search-box{
+  padding-left: 15px;
   float: right;
   width: 15vw;
   height: 2vw;
@@ -44,6 +46,16 @@ input:focus {
 }
 
 
+
+.image_title, .image-link{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  z-index: 10;
+}
+
+
+
 /*==================
     LINKS
     ===================*/
@@ -51,6 +63,8 @@ input:focus {
     p, h1, link{
       border: 0;
       padding: 0;
+      margin: 0;
+      z-index: 30;
     }
 
     a{ 
@@ -73,3 +87,7 @@ input:focus {
       text-decoration: none;
     }
 
+.image_comment{
+  border-top: 1px solid #929ca5;
+
+}

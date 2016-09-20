@@ -26039,22 +26039,22 @@
 	    'div',
 	    { className: 'image-details' },
 	    React.createElement('img', { src: props.image, className: 'the-image' }),
-	    React.createElement('br', null),
 	    React.createElement(
 	      'p',
 	      { className: 'image-title' },
+	      'title ~ ',
 	      props.title
-	    ),
-	    React.createElement(
-	      'link',
-	      { className: 'image-link', href: props.credit },
-	      'link'
 	    ),
 	    React.createElement(
 	      'p',
 	      { className: 'image_comment' },
-	      'comoment: ',
+	      'comments ~ ',
 	      props.comment
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image-link' },
+	      'link'
 	    )
 	  );
 	};
