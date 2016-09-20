@@ -16,19 +16,19 @@ const CreateImageForm = React.createClass({
     request.withCredentials = true
     request.onload = () => {
       if(request.status === 201){
-        const user = JSON.parse(request.responseText)
+        const image = JSON.parse(request.responseText)
       }
     }
     const data = {
-      user: {
         title: this.state.title,
         image: this.state.image,
         credit: this.state.credit,
         comment: this.state.comment,
-        user_id: this.props.user_id
-      }
+        user_id: this.props.data.id
     }
     request.send(JSON.stringify(data))
+    console.log("data", data)
+
   },
 
   render(){

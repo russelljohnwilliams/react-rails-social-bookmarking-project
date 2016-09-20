@@ -25866,7 +25866,6 @@
 	        _this.props.onSignUp(user);
 	      }
 	    };
-	
 	    var data = {
 	      user: {
 	        email: this.state.email,
@@ -25893,10 +25892,6 @@
 	});
 	
 	module.exports = SignUp;
-	
-	// <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
-	
-	// <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
 
 /***/ },
 /* 230 */
@@ -26270,7 +26265,7 @@
 	          'Welcome ',
 	          this.state.currentUser.user_name
 	        ),
-	        React.createElement(CreateImageForm, null),
+	        React.createElement(CreateImageForm, { data: this.state.currentUser }),
 	        'create an image link form here!!!'
 	      );
 	    }
@@ -26310,19 +26305,18 @@
 	    request.withCredentials = true;
 	    request.onload = function () {
 	      if (request.status === 201) {
-	        var user = JSON.parse(request.responseText);
+	        var image = JSON.parse(request.responseText);
 	      }
 	    };
 	    var data = {
-	      user: {
-	        title: this.state.title,
-	        image: this.state.image,
-	        credit: this.state.credit,
-	        comment: this.state.comment,
-	        user_id: this.props.user_id
-	      }
+	      title: this.state.title,
+	      image: this.state.image,
+	      credit: this.state.credit,
+	      comment: this.state.comment,
+	      user_id: this.props.data.id
 	    };
 	    request.send(JSON.stringify(data));
+	    console.log("data", data);
 	  },
 	  render: function render() {
 	    return React.createElement(

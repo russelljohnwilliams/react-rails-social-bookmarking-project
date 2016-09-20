@@ -20,7 +20,6 @@ const SignUp = React.createClass({
         this.props.onSignUp(user)
       }
     }
-
     const data = {
       user: {
         email: this.state.email,
@@ -45,10 +44,3 @@ const SignUp = React.createClass({
 })
 
 module.exports = SignUp
-
-
-// <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
-
-// <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
-
-
