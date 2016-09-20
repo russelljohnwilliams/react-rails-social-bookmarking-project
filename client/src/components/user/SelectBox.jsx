@@ -19,7 +19,7 @@ var SelectBox = React.createClass({
   render: function(){
     var users = this.props.data.map(function(user){
       return(
-        <option value={user.user_name} key={user.user_name}>
+        <option value={user.user_name} key={user.email}>
         {user.user_name}
         </option>
         )

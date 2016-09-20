@@ -26033,19 +26033,14 @@
 	    'div',
 	    { className: 'image-details' },
 	    React.createElement('img', { src: props.image, className: 'the-image' }),
+	    React.createElement('br', null),
 	    React.createElement(
 	      'h3',
 	      { className: 'image-title' },
 	      props.title
 	    ),
 	    React.createElement(
-	      'h4',
-	      { className: 'image-user' },
-	      'posted by: ',
-	      props.user.user_name
-	    ),
-	    React.createElement(
-	      'h4',
+	      'p',
 	      { className: 'image-credit' },
 	      'linked from: ',
 	      props.credit
@@ -26116,6 +26111,7 @@
 	
 	
 	  handleSubmit: function handleSubmit(e) {
+	    console.log("e:", e.user_name);
 	    var index = this.state.data.map(function (e) {
 	      return e.user_name;
 	    }).indexOf(e);
@@ -26190,7 +26186,7 @@
 	    var users = this.props.data.map(function (user) {
 	      return React.createElement(
 	        'option',
-	        { value: user.user_name, key: user.user_name },
+	        { value: user.user_name, key: user.email },
 	        user.user_name
 	      );
 	    }.bind(this));

@@ -30,6 +30,7 @@ const Users = React.createClass({
   },
 
   handleSubmit :function(e){
+    console.log("e:", e.user_name)
    const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
    this.setState({images: this.state.data[index].image})
  },

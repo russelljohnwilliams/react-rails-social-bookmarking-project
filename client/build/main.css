@@ -1,8 +1,25 @@
+body{
+  background: grey;
+}
 .the-image{
-  max-width: 50vw;
+  padding: 0;
+  margin: 5;
+  max-width: 40vw;
+  border-radius: 1%;
+  border: 1px solid black;
 }
 
 
 .similar-images{
   width: 200px;
+}
+
+.image-details{
+  float: left;
+  max-width: 40vw;
+  padding: 10px;
+  border: 1px solid grey;
+  margin: 10px;
+  background: white;
+  border-radius: 1.5%;
 }
