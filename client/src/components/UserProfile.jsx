@@ -38,13 +38,13 @@ const UserProfile = React.createClass({
 
   render(){
 
-    let mainDiv = <div>
+    let mainDiv = <div className="image-upload-box">
 
-    <h4>Please Sign In</h4>
+    <h4>PLEASE SIGN IN</h4>
     </div>
     if(this.state.currentUser){
       mainDiv = <div>
-      <h4>Welcome {this.state.currentUser.user_name}</h4>
+      <h4>WELCOME {this.state.currentUser.user_name.toUpperCase()}</h4><br/>
 
       <CreateImageForm data={this.state.currentUser}/>
       </div>

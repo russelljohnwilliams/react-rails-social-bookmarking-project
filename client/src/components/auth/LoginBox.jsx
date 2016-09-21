@@ -33,8 +33,9 @@ const LoginBox = React.createClass({
   },
 
   render(){
-    let mainDiv = <div>
-    <h4>Please Sign In/Up</h4>
+    let mainDiv = <div className="login-box">
+    <h4>PLEASE LOG IN</h4><h4>NOT JOINED YET? THEN SIGN UP NOW</h4><br/>
+    <br/>
 
     <SignIn url={this.props.url + "users/sign_in.json"}
     onSignIn={this.setUser}/><br/>
@@ -43,7 +44,7 @@ const LoginBox = React.createClass({
     if(this.state.currentUser){
       mainDiv = <div>
 
-      <h4>Welcome {this.state.currentUser.user_name}</h4>
+      <h4>WELCOME {this.state.currentUser.user_name.toUpperCase()}</h4>
       <SignOut url={this.props.url + "users/sign_out.json"}
       onSignOut={this.setUser}/>
       </div>

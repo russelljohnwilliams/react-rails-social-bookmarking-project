@@ -56,10 +56,10 @@
 	
 	var Home = __webpack_require__(222);
 	var Gallery = __webpack_require__(232);
-	var Users = __webpack_require__(234);
-	var UserProfile = __webpack_require__(237);
-	var Image = __webpack_require__(235);
-	var Main = __webpack_require__(239);
+	var Users = __webpack_require__(236);
+	var UserProfile = __webpack_require__(238);
+	var Image = __webpack_require__(234);
+	var Main = __webpack_require__(240);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -25493,12 +25493,19 @@
 	  render: function render() {
 	    var mainDiv = React.createElement(
 	      'div',
-	      null,
+	      { className: 'login-box' },
 	      React.createElement(
 	        'h4',
 	        null,
-	        'Please Sign In/Up'
+	        'PLEASE LOG IN'
 	      ),
+	      React.createElement(
+	        'h4',
+	        null,
+	        'NOT JOINED YET? THEN SIGN UP NOW'
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
 	      React.createElement(SignIn, { url: this.props.url + "users/sign_in.json",
 	        onSignIn: this.setUser }),
 	      React.createElement('br', null),
@@ -25512,8 +25519,8 @@
 	        React.createElement(
 	          'h4',
 	          null,
-	          'Welcome ',
-	          this.state.currentUser.user_name
+	          'WELCOME ',
+	          this.state.currentUser.user_name.toUpperCase()
 	        ),
 	        React.createElement(SignOut, { url: this.props.url + "users/sign_out.json",
 	          onSignOut: this.setUser })
@@ -26035,8 +26042,8 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = __webpack_require__(1);
-	var Image = __webpack_require__(235);
-	var SmallImage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./SmallImage\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var Image = __webpack_require__(234);
+	var SmallImage = __webpack_require__(235);
 	
 	var Post = React.createClass({
 	    displayName: 'Post',
@@ -26051,35 +26058,119 @@
 	        return React.createElement(
 	            'div',
 	            { className: 'post-container' },
-	            images,
-	            React.createElement(SmallImage, { images: images })
+	            images
 	        );
 	    }
 	});
 	
 	module.exports = Post;
-	
-	//   render(){
-	//     return(
-	//       <div className="post-container">
-	//           {
-	//             this.props.images.filter((image) => `${image.title} ${image.comment} ${image.user.user_name}`.toUpperCase().indexOf(this.props.searchQuery.toUpperCase()) >= 0)
-	//           .map((image) => (
-	//             <Image {...image} key={image.id} />,
-	//             ))
-	//         }
-	
-	
-	//       </div>
-	
-	//       )
-	//   }
-	// })
-	
-	// module.exports = Post
 
 /***/ },
 /* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var _require = __webpack_require__(159);
+	
+	var Link = _require.Link;
+	
+	
+	var Image = function Image(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'image-details' },
+	    React.createElement('img', { src: props.image, className: 'the-image' }),
+	    React.createElement(
+	      'p',
+	      { className: 'image-title' },
+	      'title ~ ',
+	      props.title
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image_comment' },
+	      'comments ~ ',
+	      props.comment
+	    ),
+	    React.createElement(
+	      'a',
+	      { className: 'image-link', href: props.credit },
+	      'link'
+	    )
+	  );
+	};
+	
+	var _React$PropTypes = React.PropTypes;
+	var string = _React$PropTypes.string;
+	var number = _React$PropTypes.number;
+	
+	
+	Image.propTypes = {
+	  title: string.isRequired,
+	  image: string.isRequired,
+	  credit: string.isRequired,
+	  comment: string.isRequired
+	};
+	
+	module.exports = Image;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var _require = __webpack_require__(159);
+	
+	var Link = _require.Link;
+	
+	
+	var SmallImage = function SmallImage(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'image-details' },
+	    React.createElement('img', { src: props.image, className: 'the-image' }),
+	    React.createElement(
+	      'p',
+	      { className: 'image-title' },
+	      'title ~ ',
+	      props.title
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image_comment' },
+	      'comments ~ ',
+	      props.comment
+	    ),
+	    React.createElement(
+	      'a',
+	      { className: 'image-link', href: props.credit },
+	      'link'
+	    )
+	  );
+	};
+	
+	var _React$PropTypes = React.PropTypes;
+	var string = _React$PropTypes.string;
+	var number = _React$PropTypes.number;
+	
+	
+	Image.propTypes = {
+	  title: string.isRequired,
+	  image: string.isRequired,
+	  credit: string.isRequired,
+	  comment: string.isRequired
+	};
+	
+	module.exports = SmallImage;
+
+/***/ },
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26088,9 +26179,9 @@
 	
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
-	var Image = __webpack_require__(235);
+	var Image = __webpack_require__(234);
 	var NavBarHeader = __webpack_require__(231);
-	var SelectBox = __webpack_require__(236);
+	var SelectBox = __webpack_require__(237);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
 	
@@ -26148,59 +26239,7 @@
 	module.exports = Users;
 
 /***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var _require = __webpack_require__(159);
-	
-	var Link = _require.Link;
-	
-	
-	var Image = function Image(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'image-details' },
-	    React.createElement('img', { src: props.image, className: 'the-image' }),
-	    React.createElement(
-	      'p',
-	      { className: 'image-title' },
-	      'title ~ ',
-	      props.title
-	    ),
-	    React.createElement(
-	      'p',
-	      { className: 'image_comment' },
-	      'comments ~ ',
-	      props.comment
-	    ),
-	    React.createElement(
-	      'a',
-	      { className: 'image-link', href: props.credit },
-	      'link'
-	    )
-	  );
-	};
-	
-	var _React$PropTypes = React.PropTypes;
-	var string = _React$PropTypes.string;
-	var number = _React$PropTypes.number;
-	
-	
-	Image.propTypes = {
-	  title: string.isRequired,
-	  image: string.isRequired,
-	  credit: string.isRequired,
-	  comment: string.isRequired
-	};
-	
-	module.exports = Image;
-
-/***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26240,15 +26279,15 @@
 	module.exports = SelectBox;
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var CreateImageForm = __webpack_require__(238);
+	var CreateImageForm = __webpack_require__(239);
 	var NavBarHeader = __webpack_require__(231);
-	var Image = __webpack_require__(235);
+	var Image = __webpack_require__(234);
 	var Router = __webpack_require__(159);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
@@ -26290,11 +26329,11 @@
 	
 	    var mainDiv = React.createElement(
 	      'div',
-	      null,
+	      { className: 'image-upload-box' },
 	      React.createElement(
 	        'h4',
 	        null,
-	        'Please Sign In'
+	        'PLEASE SIGN IN'
 	      )
 	    );
 	    if (this.state.currentUser) {
@@ -26304,9 +26343,10 @@
 	        React.createElement(
 	          'h4',
 	          null,
-	          'Welcome ',
-	          this.state.currentUser.user_name
+	          'WELCOME ',
+	          this.state.currentUser.user_name.toUpperCase()
 	        ),
+	        React.createElement('br', null),
 	        React.createElement(CreateImageForm, { data: this.state.currentUser })
 	      );
 	    }
@@ -26327,7 +26367,7 @@
 	module.exports = UserProfile;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26367,21 +26407,21 @@
 	  render: function render() {
 	    return React.createElement(
 	      'form',
-	      { className: 'signup-form' },
-	      React.createElement('input', { type: 'text', valueLink: this.linkState('title'), placeholder: 'add title' }),
+	      { className: 'input-image-form' },
+	      React.createElement('input', { className: 'image-input', type: 'text', valueLink: this.linkState('title'), placeholder: 'add title' }),
 	      React.createElement('br', null),
-	      React.createElement('input', { type: 'text', valueLink: this.linkState('image'), placeholder: 'image link' }),
+	      React.createElement('input', { className: 'image-input', type: 'text', valueLink: this.linkState('image'), placeholder: 'image link' }),
 	      ' ',
 	      React.createElement('br', null),
-	      React.createElement('input', { type: 'text', valueLink: this.linkState('credit'), placeholder: 'add reference' }),
+	      React.createElement('input', { className: 'image-input', type: 'text', valueLink: this.linkState('credit'), placeholder: 'add reference' }),
 	      React.createElement('br', null),
-	      React.createElement('input', { type: 'text', valueLink: this.linkState('comment'), placeholder: 'add comment' }),
+	      React.createElement('input', { className: 'image-input', type: 'text', valueLink: this.linkState('comment'), placeholder: 'add comment' }),
 	      '  ',
 	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
-	        { onClick: this.signUp },
-	        ' Sign Up '
+	        { className: 'image-input-button', onClick: this.signUp },
+	        ' submit '
 	      )
 	    );
 	  }
@@ -26390,7 +26430,7 @@
 	module.exports = CreateImageForm;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

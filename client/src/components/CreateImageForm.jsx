@@ -33,12 +33,12 @@ const CreateImageForm = React.createClass({
 
   render(){
     return(
-      <form className='signup-form'>
-      <input type="text" valueLink={this.linkState('title')} placeholder="add title"/><br/>
-      <input type="text" valueLink={this.linkState('image')} placeholder="image link"/> <br/>
-      <input type="text" valueLink={this.linkState('credit')} placeholder="add reference"/><br/>
-      <input type="text" valueLink={this.linkState('comment')} placeholder="add comment"/>  <br/>
-      <button onClick={this.signUp}> Sign Up </button>
+      <form className='input-image-form'>
+      <input className="image-input" type="text" valueLink={this.linkState('title')} placeholder="add title"/><br/>
+      <input className="image-input" type="text" valueLink={this.linkState('image')} placeholder="image link"/> <br/>
+      <input className="image-input" type="text" valueLink={this.linkState('credit')} placeholder="add reference"/><br/>
+      <input className="image-input" type="text" valueLink={this.linkState('comment')} placeholder="add comment"/>  <br/>
+      <button className="image-input-button" onClick={this.signUp}> submit </button>
       </form>
       )
   }

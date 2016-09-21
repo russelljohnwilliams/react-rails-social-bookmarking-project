@@ -30,19 +30,16 @@ const Users = React.createClass({
     this.setState({images: this.state.data[index].image})
   },
 
-
   render(){
     return(
       <div className="users">
       <nav>
       <NavBarHeader/>
-      
       <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
       </nav>
       <div className='images-container'>
       {
         this.state.images.map((image) => (
-
           <Image { ...image } key={image.id} />
           ))
       }
