@@ -25,10 +25,6 @@ const Users = React.createClass({
     request.send( null )
   },
 
-  doSearch(event){
-    this.setState({searchQuery: event.target.value})
-  },
-
   handleSubmit :function(e){
     const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
     this.setState({images: this.state.data[index].image})
@@ -42,12 +38,10 @@ const Users = React.createClass({
       <NavBarHeader/>
       
       <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
-      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
       </nav>
       <div className='images-container'>
       {
-        this.state.images.filter((image) => `${image.title} ${image.comment}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-        .map((image) => (
+        this.state.images.map((image) => (
 
           <Image { ...image } key={image.id} />
           ))

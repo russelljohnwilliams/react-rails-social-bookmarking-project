@@ -24,7 +24,7 @@ html{
 }
 
 input:focus {
-    outline:none;
+  outline:none;
 }
 
 .similar-images{
@@ -85,17 +85,50 @@ input:focus {
       text-decoration: none;
     }
 
-.image_comment{
-  border-top: 1px solid #929ca5;
-}
+    .image_comment{
+      border-top: 1px solid #929ca5;
+    }
 
-.image-link{
-  text-decoration: none;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.8em;
-  color: #929ca5;
-  
-}
+    .image-link{
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8em;
+      color: #929ca5;
+
+    }
+
+    #container {
+      float: right;
+      width: 240px;
+      padding: 10px;
+    }
+
+    .clearfix:after {
+      display: block;
+      clear: both;
+      height: 0;
+      visibility: hidden;
+    }
+
+    input[type=search] {
+      float: right;
+      -webkit-box-sizing: content-box;
+      margin: 0;
+      outline: none;
+      background-color: white;
+      padding: 12px 10px 12px 10px;
+      width: 50px;
+      border: 0;
+      transition: all .9s;
+    }
+
+    input[type=search]:focus {
+      width: 140px;
+    }
+
+
+
+
 
 
 

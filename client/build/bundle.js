@@ -26008,7 +26008,11 @@
 	        'nav',
 	        null,
 	        React.createElement(NavBarHeader, null),
-	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
+	        React.createElement(
+	          'div',
+	          { id: 'container', className: 'clearfix' },
+	          React.createElement('input', { type: 'search', placeholder: 'Search', value: this.state.searchQuery, onChange: this.doSearch })
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -26028,33 +26032,58 @@
 
 	'use strict';
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var React = __webpack_require__(1);
 	var Image = __webpack_require__(235);
 	var SmallImage = __webpack_require__(240);
 	
 	var Post = React.createClass({
 	  displayName: 'Post',
-	  getInitialState: function getInitialState() {
-	    return { imageUserId: '' };
-	  },
 	  render: function render() {
-	    var _this = this;
-	
 	    return React.createElement(
 	      'div',
 	      { className: 'post-container' },
-	      this.props.images.filter(function (image) {
-	        return (image.title + ' ' + image.comment + ' ' + image.user.user_name).toUpperCase().indexOf(_this.props.searchQuery.toUpperCase()) >= 0;
-	      }).map(function (image) {
-	        return React.createElement(Image, _extends({}, image, { key: image.id }));
-	      })
+	      React.createElement(Image, { images: this.props.images }),
+	      React.createElement(SmallImage, { images: this.props.images })
 	    );
 	  }
 	});
 	
 	module.exports = Post;
+	
+	//   render(){
+	//    const images = this.props.images.filter((image) => `${image.title} ${image.comment} ${image.user.user_name}`.toUpperCase().indexOf(this.props.searchQuery.toUpperCase()) >= 0).map((image) => (<Image {...image} key={image.id} />))
+	//     return(
+	//       <div className="post-container">
+	//           {images}
+	
+	//           <SmallImage images={images} />
+	//       </div>
+	//       )
+	
+	//   }
+	// })
+	
+	// module.exports = Post
+	
+	
+	//   render(){
+	//     return(
+	//       <div className="post-container">
+	//           {
+	//             this.props.images.filter((image) => `${image.title} ${image.comment} ${image.user.user_name}`.toUpperCase().indexOf(this.props.searchQuery.toUpperCase()) >= 0)
+	//           .map((image) => (
+	//             <Image {...image} key={image.id} />,
+	//             ))
+	//         }
+	
+	
+	//       </div>
+	
+	//       )
+	//   }
+	// })
+	
+	// module.exports = Post
 
 /***/ },
 /* 234 */
@@ -26093,9 +26122,6 @@
 	    };
 	    request.send(null);
 	  },
-	  doSearch: function doSearch(event) {
-	    this.setState({ searchQuery: event.target.value });
-	  },
 	
 	
 	  handleSubmit: function handleSubmit(e) {
@@ -26106,8 +26132,6 @@
 	  },
 	
 	  render: function render() {
-	    var _this2 = this;
-	
 	    return React.createElement(
 	      'div',
 	      { className: 'users' },
@@ -26115,15 +26139,12 @@
 	        'nav',
 	        null,
 	        React.createElement(NavBarHeader, null),
-	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit }),
-	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
+	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit })
 	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'images-container' },
-	        this.state.images.filter(function (image) {
-	          return (image.title + ' ' + image.comment).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
-	        }).map(function (image) {
+	        this.state.images.map(function (image) {
 	          return React.createElement(Image, _extends({}, image, { key: image.id }));
 	        })
 	      )
@@ -26146,42 +26167,62 @@
 	var Link = _require.Link;
 	
 	
-	var Image = function Image(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'image-details' },
-	    React.createElement('img', { src: props.image, className: 'the-image' }),
-	    React.createElement(
-	      'p',
-	      { className: 'image-title' },
-	      'title ~ ',
-	      props.title
-	    ),
-	    React.createElement(
-	      'p',
-	      { className: 'image_comment' },
-	      'comments ~ ',
-	      props.comment
-	    ),
-	    React.createElement(
-	      'a',
-	      { className: 'image-link', href: props.credit },
-	      'link'
-	    )
-	  );
-	};
-	
-	var _React$PropTypes = React.PropTypes;
-	var string = _React$PropTypes.string;
-	var number = _React$PropTypes.number;
+	var Image = React.createClass({
+	  displayName: 'Image',
 	
 	
-	Image.propTypes = {
-	  title: string.isRequired,
-	  image: string.isRequired,
-	  credit: string.isRequired,
-	  comment: string.isRequired
-	};
+	  render: function render() {
+	    var images = this.props.images.map(function (image) {
+	      return React.createElement(
+	        'div',
+	        { className: 'characterPic' },
+	        React.createElement('img', { src: image.image, className: 'the-image' }),
+	        React.createElement(
+	          'p',
+	          { className: 'image-title' },
+	          'title ~ ',
+	          image.title
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'image_comment' },
+	          'comments ~ ',
+	          image.comment
+	        ),
+	        React.createElement(
+	          'a',
+	          { className: 'image-link', href: image.credit },
+	          'link'
+	        )
+	      );
+	    }.bind(this));
+	    return React.createElement(
+	      'div',
+	      null,
+	      images
+	    );
+	  }
+	
+	});
+	
+	// const Image = (props) => (
+	//   <div className='image-details'>
+	//   <img src={props.image} className='the-image'/>
+	//   <p className='image-title'>title ~ {props.title}</p>
+	//   <p className='image_comment'>comments ~ {props.comment}</p>
+	//   <a className="image-link" href={props.credit} >link</a>
+	//   </div>
+	//   )
+	
+	
+	// const { string, number } = React.PropTypes
+	
+	// Image.propTypes = { 
+	//   title: string.isRequired,
+	//   image: string.isRequired,
+	//   credit: string.isRequired,
+	//   comment: string.isRequired
+	// }
 	
 	module.exports = Image;
 
@@ -26404,9 +26445,55 @@
 
 /***/ },
 /* 240 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var _require = __webpack_require__(159);
+	
+	var Link = _require.Link;
+	
+	
+	var SmallImage = function SmallImage(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'image-details' },
+	    React.createElement('img', { src: props.image, className: 'the-image' }),
+	    React.createElement(
+	      'p',
+	      { className: 'image-title' },
+	      'title ~ ',
+	      props.title
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image_comment' },
+	      'comments ~ ',
+	      props.comment
+	    ),
+	    React.createElement(
+	      'a',
+	      { className: 'image-link', href: props.credit },
+	      'link'
+	    )
+	  );
+	};
+	
+	var _React$PropTypes = React.PropTypes;
+	var string = _React$PropTypes.string;
+	var number = _React$PropTypes.number;
+	
+	
+	Image.propTypes = {
+	  title: string.isRequired,
+	  image: string.isRequired,
+	  credit: string.isRequired,
+	  comment: string.isRequired
+	};
+	
+	module.exports = SmallImage;
 
 /***/ }
 /******/ ]);

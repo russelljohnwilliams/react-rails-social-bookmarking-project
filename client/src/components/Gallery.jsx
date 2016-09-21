@@ -29,20 +29,21 @@ const Gallery = React.createClass({
     this.setState({searchQuery: event.target.value})
   },
 
+
   render(){
 
     return(
       <div className="user">
       <nav>
       <NavBarHeader />
-      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
+
+      <div id="container" className="clearfix">      
+      <input type="search" placeholder="Search" value={this.state.searchQuery} onChange={this.doSearch}/>
+      </div>
+      
       </nav>
-
       <div className='images-container'>
-
-      
       <Post searchQuery={this.state.searchQuery} images={this.state.images} />
-      
       </div>
       </div>
       )
