@@ -33,9 +33,9 @@ const SignUp = React.createClass({
   render(){
     return(
       <form className='signup-form'>
-      <input type="text" valueLink={this.linkState('email')} placeholder="Email ..."/>
-      <input type="password" valueLink={this.linkState('password')} placeholder="password..."/>
-      <input type="password" valueLink={this.linkState('passwordConfirmation')} placeholder=" confirm password..."/>  
+      <input type="text" valueLink={this.linkState('email')} placeholder="Email ..."/><br/>
+      <input type="password" valueLink={this.linkState('password')} placeholder="password..."/><br/>
+      <input type="password" valueLink={this.linkState('passwordConfirmation')} placeholder=" confirm password..."/>  <br/>
       <button onClick={this.signUp}> Sign Up </button>
       </form>
       )

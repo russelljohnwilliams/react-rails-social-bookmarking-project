@@ -1,30 +1,23 @@
 html{
   text-decoration: none;
   font-family: 'Raleway', sans-serif;
-}
-body{
+  font-size: 0.8em;
   background: #f0f5f9;
-  color: #444f59;
-
+  color: #929ca5;
 }
+
 .the-image{
   padding: 0;
   margin: 5;
   width: 30vw;
-  /*border-radius: 1%;*/
-  border: 1px solid black;
 }
 
 .search-box{
+  padding-left: 15px;
   float: right;
   width: 15vw;
   height: 2vw;
   border: 0
-
-}
-
-input:focus {
-    outline:none;
 }
 
 .similar-images{
@@ -40,36 +33,208 @@ input:focus {
   margin-left: 10vw;
   margin-top: 3vw;
   background: white;
-  /*border-radius: 1.5%;*/
+}
+
+.image_title, .image-link{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  z-index: 10;
+}
+
+
+
+.image_comment{
+  border-top: 1px solid #929ca5;
+}
+
+.image-link{
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8em;
+  color: #929ca5;
+}
+
+#container {
+  float: right;
+  width: 240px;
+  padding: 10px;
+}
+
+.clearfix:after {
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+input[type=search] {
+  float: right;
+  -webkit-box-sizing: content-box;
+  margin: 0;
+  outline: none;
+  background-color: white;
+  padding: 12px 10px 12px 10px;
+  width: 50px;
+  border: 0;
+  transition: all .9s;
+}
+
+input[type=search]:focus {
+  width: 140px;
+}
+
+h4{
+  font-family: 'Anton', sans-serif;
+  font-size: 4vw;
+  color: #444f59;
+  padding:0;
+  margin: 0;
+  border:0;
 }
 
 
 /*==================
-    LINKS
-    ===================*/
+LINKS
+===================*/
 
-    p, h1, link{
-      border: 0;
-      padding: 0;
-    }
+p, h1, link{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 30;
+}
 
-    a{ 
-      font-family: 'Anton', sans-serif;
-      font-size: 6.5vw;
-      padding:0;
-      margin: 0;
-      border:0;
-    }
+a{ 
+  font-family: 'Anton', sans-serif;
+  font-size: 7.37vw;
+  padding:0;
+  margin: 0;
+  border:0;
+}
 
-    a:link, :visited, :active {
-      text-decoration: none;
-      color: #444f59
-    }
+a:link, :visited, :active {
+  text-decoration: none;
+  color: #444f59
+}
 
-    
+a:hover {
+  color: black  ;
+  text-decoration: none;
+}
 
-    a:hover {
-      color: black  ;
-      text-decoration: none;
-    }
+
+
+/*========================
+
+forms
+
+==========================*/
+
+.signup-form{
+  text-align: center;
+}
+
+form{
+  text-align: center;
+}
+
+input{
+  transition: all .9s;
+  background: white;
+  border: 0;
+  padding: 10px;
+  margin: 10px;
+  width: 15vw;
+}
+
+input:focus {
+  transition: all .9s;
+  outline:none;
+  background-color: #929ca5;
+  color: white;
+  width: 20vw;
+}
+
+button{
+  background: white;
+  border: 0;
+  padding: 10px;
+  margin: 10px;
+  width: 15vw;
+  color: #929ca5;
+  transition: all .9s;
+}
+
+button:hover{
+  transition: all .9s;
+  background-color: #929ca5;
+  color: white;
+}
+
+button:focus{
+  outline: none;
+  background-color: #444f59;
+}
+
+::-webkit-input-placeholder {
+  color: #444f59;
+}
+
+.login-form{
+  position: inline;
+  float: left;
+
+  width: 500px;
+  margin:0;
+  margin-top: 30px;
+  margin-left: 100px
+}
+
+.signup-form{
+  float: right;
+  width: 500px;
+  margin:0;
+  margin-top: 10px;
+  margin-right: 100px
+}
+
+.login-box{
+  margin-top: 30px;
+}
+
+.input-image-form{
+  margin-top: 70px;
+}
+
+option, select{
+  transition: all .9s;
+  background: white;
+  border: 0;
+  padding: 10px;
+  margin: 10px;
+  width: 15vw;
+  height: 40px;
+  font-size: 
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  font-family: 'Anton', sans-serif;
+  font-size: 2vw;
+  color: #444f59;
+}
+.styled-select select {
+        font-size: 14pt;
+        font-family:"Times New Roman",Times,serif;
+        height: 10px;
+}
+
+option:focus {
+  outline: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+
 

@@ -1,6 +1,7 @@
 const React = require('react')
 const Router = require('react-router')
-const Image = require('./Image')
+const Post = require('./Post')
+const NavBarHeader = require('./NavBarHeader')
 const {Link, browserHistory} = Router
 
 const Gallery = React.createClass({
@@ -19,7 +20,6 @@ const Gallery = React.createClass({
         const data = JSON.parse(request.responseText)
         const data2 = data.reverse()
         this.setState({images: data2})
-        this.setState({image: this.state.images[4].image})
       }
     }
     request.send( null )
@@ -29,33 +29,22 @@ const Gallery = React.createClass({
     this.setState({searchQuery: event.target.value})
   },
 
+
   render(){
 
     return(
       <div className="user">
       <nav>
-      <Link className="title" to='/'>BOOKMARKER </Link>
-      <Link className="login" to='/home'>LOGIN </Link>
-      <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
-      <Link className="userprofile" to='/userprofile'>USER</Link><br/>
-      
+      <NavBarHeader />
 
-      <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
-      </nav>
-
-      <div className='images-container'>
-
-      {
-        this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-        .map((image) => (
-
-          <Image { ...image } key={image.id} />
-
-          ))
-      }
-
+      <div id="container" className="clearfix">      
+      <input type="search" placeholder="Search" value={this.state.searchQuery} onChange={this.doSearch}/>
       </div>
       
+      </nav>
+      <div className='images-container'>
+      <Post searchQuery={this.state.searchQuery} images={this.state.images} />
+      </div>
       </div>
       )
   }

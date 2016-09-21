@@ -8,13 +8,11 @@ var SelectBox = React.createClass({
     return {users: null}
   },
 
-
   handleSelect: function(e){
     e.preventDefault()
     var attribute = e.target.value
     this.props.onSubmit(attribute)
   },
-
 
   render: function(){
     var users = this.props.data.map(function(user){

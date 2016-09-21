@@ -1,5 +1,7 @@
 const React = require('react')
 const CreateImageForm = require('./CreateImageForm')
+const NavBarHeader = require('./NavBarHeader')
+const Image = require('./Image')
 const Router = require('react-router')
 const {Link, browserHistory} = Router
 
@@ -36,29 +38,23 @@ const UserProfile = React.createClass({
 
   render(){
 
-    let mainDiv = <div>
+    let mainDiv = <div className="image-upload-box">
 
-    <h4>Please Sign In</h4>
-
+    <h4>PLEASE SIGN IN</h4>
     </div>
     if(this.state.currentUser){
       mainDiv = <div>
-      <h4>Welcome {this.state.currentUser.user_name}</h4>
+      <h4>WELCOME {this.state.currentUser.user_name.toUpperCase()}</h4><br/>
 
       <CreateImageForm data={this.state.currentUser}/>
-      create an image link form here!!!
+      </div>
 
-      </div>}
+    }
 
       return(
-
         <div>
         <nav>
-        <Link className="title" to='/'>BOOKMARKER </Link>
-              <Link className="login" to='/home'>LOGIN </Link>
-              <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
-              <Link className="userprofile" to='/userprofile'>USER</Link><br/>
-
+        <NavBarHeader/>
         </nav>
         {mainDiv}
         </div>
