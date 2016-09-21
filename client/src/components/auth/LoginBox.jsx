@@ -37,8 +37,8 @@ const LoginBox = React.createClass({
     <h4>Please Sign In/Up</h4>
 
     <SignIn url={this.props.url + "users/sign_in.json"}
-    onSignIn={this.setUser}/>
-    <SignUp url={this.props.url + "users.json"} onSignUp={this.setUser} />
+    onSignIn={this.setUser}/><br/>
+    <SignUp url={this.props.url + "users.json"} onSignUp={this.setUser} /><br/>
     </div>
     if(this.state.currentUser){
       mainDiv = <div>

@@ -1,13 +1,14 @@
 const React = require('react')
 const Router = require('react-router')
 const Image = require('../Image')
+const NavBarHeader = require('../NavBarHeader')
 const SelectBox = require('./SelectBox')
 const {Link, browserHistory} = Router
 
 const Users = React.createClass({
 
   getInitialState(){
-    return {searchQuery: '', index: '', data:[], images: []}
+    return {searchQuery: '', data:[], images: []}
   },
 
   componentDidMount(){
@@ -18,7 +19,6 @@ const Users = React.createClass({
     request.onload = () => {
       if (request.status === 200){
         const data = JSON.parse(request.responseText)
-        console.log("DATA", data)
         this.setState({data: data})
       }
     }
@@ -30,7 +30,6 @@ const Users = React.createClass({
   },
 
   handleSubmit :function(e){
-    console.log("e:", e.user_name)
     const index = this.state.data.map(function (e) { return e.user_name; }).indexOf(e);
     this.setState({images: this.state.data[index].image})
   },
@@ -40,17 +39,14 @@ const Users = React.createClass({
     return(
       <div className="users">
       <nav>
-      <Link className="title" to='/'>BOOKMARKER </Link>
-      <Link className="login" to='/home'>LOGIN </Link>
-      <Link className="userspage" to='/users'>CONTRIBUTORS </Link>
-      <Link className="userprofile" to='/userprofile'>USER</Link><br/>
+      <NavBarHeader/>
       
       <SelectBox data={this.state.data} onSubmit={this.handleSubmit}/>
       <input className="search-box" type='text' placeholder='search...' value={this.state.searchQuery} onChange={this.doSearch} />
       </nav>
       <div className='images-container'>
       {
-        this.state.images.filter((image) => `${image.title} ${image.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+        this.state.images.filter((image) => `${image.title} ${image.comment}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
         .map((image) => (
 
           <Image { ...image } key={image.id} />

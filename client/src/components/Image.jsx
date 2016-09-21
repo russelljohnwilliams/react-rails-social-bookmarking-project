@@ -5,10 +5,9 @@ const {Link} =require('react-router')
 const Image = (props) => (
   <div className='image-details'>
   <img src={props.image} className='the-image'/>
-  
   <p className='image-title'>title ~ {props.title}</p>
   <p className='image_comment'>comments ~ {props.comment}</p>
-  <p className="image-link" >link</p>
+  <a className="image-link" href={props.credit} >link</a>
   </div>
   )
 

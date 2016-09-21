@@ -2,12 +2,10 @@ html{
   text-decoration: none;
   font-family: 'Raleway', sans-serif;
   font-size: 0.8em;
-}
-body{
   background: #f0f5f9;
   color: #929ca5;
-
 }
+
 .the-image{
   padding: 0;
   margin: 5;
@@ -69,7 +67,7 @@ input:focus {
 
     a{ 
       font-family: 'Anton', sans-serif;
-      font-size: 6.5vw;
+      font-size: 7.37vw;
       padding:0;
       margin: 0;
       border:0;
@@ -89,5 +87,17 @@ input:focus {
 
 .image_comment{
   border-top: 1px solid #929ca5;
-
 }
+
+.image-link{
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8em;
+  color: #929ca5;
+  
+}
+
+
+
+
+

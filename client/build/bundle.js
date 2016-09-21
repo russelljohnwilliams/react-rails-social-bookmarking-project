@@ -55,11 +55,11 @@
 	var hashHistory = ReactRouter.hashHistory;
 	
 	var Home = __webpack_require__(222);
-	var Gallery = __webpack_require__(231);
-	var Users = __webpack_require__(233);
-	var UserProfile = __webpack_require__(235);
-	var Image = __webpack_require__(232);
-	var Main = __webpack_require__(237);
+	var Gallery = __webpack_require__(232);
+	var Users = __webpack_require__(234);
+	var UserProfile = __webpack_require__(237);
+	var Image = __webpack_require__(235);
+	var Main = __webpack_require__(239);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -25435,6 +25435,7 @@
 	
 	var React = __webpack_require__(1);
 	var LoginBox = __webpack_require__(223);
+	var NavBarHeader = __webpack_require__(231);
 	
 	var _require = __webpack_require__(159);
 	
@@ -25445,31 +25446,7 @@
 	  return React.createElement(
 	    'div',
 	    { className: 'home' },
-	    React.createElement(
-	      'nav',
-	      null,
-	      React.createElement(
-	        Link,
-	        { className: 'title', to: '/' },
-	        'BOOKMARKER '
-	      ),
-	      React.createElement(
-	        Link,
-	        { className: 'login', to: '/home' },
-	        'LOGIN '
-	      ),
-	      React.createElement(
-	        Link,
-	        { className: 'userspage', to: '/users' },
-	        'CONTRIBUTORS '
-	      ),
-	      React.createElement(
-	        Link,
-	        { className: 'userprofile', to: '/userprofile' },
-	        'USER'
-	      ),
-	      React.createElement('br', null)
-	    ),
+	    React.createElement(NavBarHeader, null),
 	    React.createElement(LoginBox, { url: 'http://localhost:5000/' })
 	  );
 	};
@@ -25524,7 +25501,9 @@
 	      ),
 	      React.createElement(SignIn, { url: this.props.url + "users/sign_in.json",
 	        onSignIn: this.setUser }),
-	      React.createElement(SignUp, { url: this.props.url + "users.json", onSignUp: this.setUser })
+	      React.createElement('br', null),
+	      React.createElement(SignUp, { url: this.props.url + "users.json", onSignUp: this.setUser }),
+	      React.createElement('br', null)
 	    );
 	    if (this.state.currentUser) {
 	      mainDiv = React.createElement(
@@ -25597,7 +25576,9 @@
 	      'form',
 	      { className: 'login-form' },
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('email'), placeholder: 'Email ...' }),
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'password', valueLink: this.linkState('password'), placeholder: 'password...' }),
+	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
 	        { onClick: this.signIn },
@@ -25884,8 +25865,12 @@
 	      'form',
 	      { className: 'signup-form' },
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('email'), placeholder: 'Email ...' }),
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'password', valueLink: this.linkState('password'), placeholder: 'password...' }),
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'password', valueLink: this.linkState('passwordConfirmation'), placeholder: ' confirm password...' }),
+	      '  ',
+	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
 	        { onClick: this.signUp },
@@ -25939,11 +25924,53 @@
 
 	'use strict';
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var React = __webpack_require__(1);
+	
+	var _require = __webpack_require__(159);
+	
+	var Link = _require.Link;
+	
+	
+	var Home = function Home() {
+	  return React.createElement(
+	    'div',
+	    { className: 'navbar' },
+	    React.createElement(
+	      Link,
+	      { className: 'title', to: '/' },
+	      'GALLERY '
+	    ),
+	    React.createElement(
+	      Link,
+	      { className: 'login', to: '/home' },
+	      'LOGIN '
+	    ),
+	    React.createElement(
+	      Link,
+	      { className: 'userspage', to: '/users' },
+	      'CONTRIBUTORS '
+	    ),
+	    React.createElement(
+	      Link,
+	      { className: 'userprofile', to: '/userprofile' },
+	      'USER'
+	    ),
+	    React.createElement('br', null)
+	  );
+	};
+	
+	module.exports = Home;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(159);
-	var Image = __webpack_require__(232);
+	var Post = __webpack_require__(233);
+	var NavBarHeader = __webpack_require__(231);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
 	
@@ -25965,7 +25992,6 @@
 	        var data = JSON.parse(request.responseText);
 	        var data2 = data.reverse();
 	        _this.setState({ images: data2 });
-	        _this.setState({ image: _this.state.images[4].image });
 	      }
 	    };
 	    request.send(null);
@@ -25974,7 +26000,6 @@
 	    this.setState({ searchQuery: event.target.value });
 	  },
 	  render: function render() {
-	    var _this2 = this;
 	
 	    return React.createElement(
 	      'div',
@@ -25982,37 +26007,13 @@
 	      React.createElement(
 	        'nav',
 	        null,
-	        React.createElement(
-	          Link,
-	          { className: 'title', to: '/' },
-	          'BOOKMARKER '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'login', to: '/home' },
-	          'LOGIN '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userspage', to: '/users' },
-	          'CONTRIBUTORS '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userprofile', to: '/userprofile' },
-	          'USER'
-	        ),
-	        React.createElement('br', null),
+	        React.createElement(NavBarHeader, null),
 	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
 	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'images-container' },
-	        this.state.images.filter(function (image) {
-	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
-	        }).map(function (image) {
-	          return React.createElement(Image, _extends({}, image, { key: image.id }));
-	        })
+	        React.createElement(Post, { searchQuery: this.state.searchQuery, images: this.state.images })
 	      )
 	    );
 	  }
@@ -26022,7 +26023,118 @@
 	module.exports = Gallery;
 
 /***/ },
-/* 232 */
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var React = __webpack_require__(1);
+	var Image = __webpack_require__(235);
+	var SmallImage = __webpack_require__(240);
+	
+	var Post = React.createClass({
+	  displayName: 'Post',
+	  getInitialState: function getInitialState() {
+	    return { imageUserId: '' };
+	  },
+	  render: function render() {
+	    var _this = this;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'post-container' },
+	      this.props.images.filter(function (image) {
+	        return (image.title + ' ' + image.comment + ' ' + image.user.user_name).toUpperCase().indexOf(_this.props.searchQuery.toUpperCase()) >= 0;
+	      }).map(function (image) {
+	        return React.createElement(Image, _extends({}, image, { key: image.id }));
+	      })
+	    );
+	  }
+	});
+	
+	module.exports = Post;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(159);
+	var Image = __webpack_require__(235);
+	var NavBarHeader = __webpack_require__(231);
+	var SelectBox = __webpack_require__(236);
+	var Link = Router.Link;
+	var browserHistory = Router.browserHistory;
+	
+	
+	var Users = React.createClass({
+	  displayName: 'Users',
+	  getInitialState: function getInitialState() {
+	    return { searchQuery: '', data: [], images: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    var url = 'http://localhost:5000/all_users';
+	    var request = new XMLHttpRequest();
+	    request.open("GET", url);
+	
+	    request.onload = function () {
+	      if (request.status === 200) {
+	        var data = JSON.parse(request.responseText);
+	        _this.setState({ data: data });
+	      }
+	    };
+	    request.send(null);
+	  },
+	  doSearch: function doSearch(event) {
+	    this.setState({ searchQuery: event.target.value });
+	  },
+	
+	
+	  handleSubmit: function handleSubmit(e) {
+	    var index = this.state.data.map(function (e) {
+	      return e.user_name;
+	    }).indexOf(e);
+	    this.setState({ images: this.state.data[index].image });
+	  },
+	
+	  render: function render() {
+	    var _this2 = this;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'users' },
+	      React.createElement(
+	        'nav',
+	        null,
+	        React.createElement(NavBarHeader, null),
+	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit }),
+	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'images-container' },
+	        this.state.images.filter(function (image) {
+	          return (image.title + ' ' + image.comment).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
+	        }).map(function (image) {
+	          return React.createElement(Image, _extends({}, image, { key: image.id }));
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Users;
+
+/***/ },
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26052,8 +26164,8 @@
 	      props.comment
 	    ),
 	    React.createElement(
-	      'p',
-	      { className: 'image-link' },
+	      'a',
+	      { className: 'image-link', href: props.credit },
 	      'link'
 	    )
 	  );
@@ -26074,105 +26186,7 @@
 	module.exports = Image;
 
 /***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(159);
-	var Image = __webpack_require__(232);
-	var SelectBox = __webpack_require__(234);
-	var Link = Router.Link;
-	var browserHistory = Router.browserHistory;
-	
-	
-	var Users = React.createClass({
-	  displayName: 'Users',
-	  getInitialState: function getInitialState() {
-	    return { searchQuery: '', index: '', data: [], images: [] };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
-	
-	    var url = 'http://localhost:5000/all_users';
-	    var request = new XMLHttpRequest();
-	    request.open("GET", url);
-	
-	    request.onload = function () {
-	      if (request.status === 200) {
-	        var data = JSON.parse(request.responseText);
-	        console.log("DATA", data);
-	        _this.setState({ data: data });
-	      }
-	    };
-	    request.send(null);
-	  },
-	  doSearch: function doSearch(event) {
-	    this.setState({ searchQuery: event.target.value });
-	  },
-	
-	
-	  handleSubmit: function handleSubmit(e) {
-	    console.log("e:", e.user_name);
-	    var index = this.state.data.map(function (e) {
-	      return e.user_name;
-	    }).indexOf(e);
-	    this.setState({ images: this.state.data[index].image });
-	  },
-	
-	  render: function render() {
-	    var _this2 = this;
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'users' },
-	      React.createElement(
-	        'nav',
-	        null,
-	        React.createElement(
-	          Link,
-	          { className: 'title', to: '/' },
-	          'BOOKMARKER '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'login', to: '/home' },
-	          'LOGIN '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userspage', to: '/users' },
-	          'CONTRIBUTORS '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userprofile', to: '/userprofile' },
-	          'USER'
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(SelectBox, { data: this.state.data, onSubmit: this.handleSubmit }),
-	        React.createElement('input', { className: 'search-box', type: 'text', placeholder: 'search...', value: this.state.searchQuery, onChange: this.doSearch })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'images-container' },
-	        this.state.images.filter(function (image) {
-	          return (image.title + ' ' + image.description).toUpperCase().indexOf(_this2.state.searchQuery.toUpperCase()) >= 0;
-	        }).map(function (image) {
-	          return React.createElement(Image, _extends({}, image, { key: image.id }));
-	        })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = Users;
-
-/***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26212,13 +26226,15 @@
 	module.exports = SelectBox;
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var CreateImageForm = __webpack_require__(236);
+	var CreateImageForm = __webpack_require__(238);
+	var NavBarHeader = __webpack_require__(231);
+	var Image = __webpack_require__(235);
 	var Router = __webpack_require__(159);
 	var Link = Router.Link;
 	var browserHistory = Router.browserHistory;
@@ -26277,8 +26293,7 @@
 	          'Welcome ',
 	          this.state.currentUser.user_name
 	        ),
-	        React.createElement(CreateImageForm, { data: this.state.currentUser }),
-	        'create an image link form here!!!'
+	        React.createElement(CreateImageForm, { data: this.state.currentUser })
 	      );
 	    }
 	
@@ -26288,27 +26303,7 @@
 	      React.createElement(
 	        'nav',
 	        null,
-	        React.createElement(
-	          Link,
-	          { className: 'title', to: '/' },
-	          'BOOKMARKER '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'login', to: '/home' },
-	          'LOGIN '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userspage', to: '/users' },
-	          'CONTRIBUTORS '
-	        ),
-	        React.createElement(
-	          Link,
-	          { className: 'userprofile', to: '/userprofile' },
-	          'USER'
-	        ),
-	        React.createElement('br', null)
+	        React.createElement(NavBarHeader, null)
 	      ),
 	      mainDiv
 	    );
@@ -26318,7 +26313,7 @@
 	module.exports = UserProfile;
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26360,9 +26355,15 @@
 	      'form',
 	      { className: 'signup-form' },
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('title'), placeholder: 'add title' }),
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('image'), placeholder: 'image link' }),
+	      ' ',
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('credit'), placeholder: 'add reference' }),
+	      React.createElement('br', null),
 	      React.createElement('input', { type: 'text', valueLink: this.linkState('comment'), placeholder: 'add comment' }),
+	      '  ',
+	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
 	        { onClick: this.signUp },
@@ -26373,108 +26374,9 @@
 	});
 	
 	module.exports = CreateImageForm;
-	
-	// // <input type="string" valueLink={this.linkState('user_name')} placeholder="User Name ..."/>
-	
-	// // <input type="text" valueLink={this.linkState('about')} placeholder="About ..."/>
-	
-	
-	// // const React = require('react')
-	
-	// // var React = require('react')
-	
-	// // var CreateImageForm = React.createClass({
-	
-	
-	// //   getInitialState: function(){
-	// //     return{title: '', credit: '', link: '', comment: '', user_id: ''}
-	// //   },
-	
-	// //   handleTitleChange: function(e){
-	// //     this.setState({title: e.target.value})
-	// //   },
-	
-	// //   handleCreditChange: function(e){
-	// //     this.setState({credit: e.target.value})
-	// //   },
-	
-	
-	// //   handleLinkChange: function(e){
-	// //     this.setState({link: e.target.value})
-	// //   },
-	
-	
-	// //   handleCommentChange: function(e){
-	// //     this.setState({comment: e.target.value})
-	// //   },
-	
-	// //   setUserId: function(){
-	// //     console.log("id", this.props.user_id)
-	//     // this.setState({user_id: this.props.user_id})
-	//   // }
-	
-	
-	//   // handleSubmit: function(e){
-	//   //   e.preventDefault()
-	
-	//     // signUp(){
-	//     //   const request = new XMLHttpRequest()
-	//     //   request.open("POST", this.props.url)
-	//     //   request.setRequestHeader("Content-Type", "application/json")
-	//     //   request.withCredentials = true
-	//     //   request.onload = () => {
-	//     //     if(request.status === 201){
-	//     //       const user = JSON.parse(request.responseText)
-	//     //       this.props.onSignUp(user)
-	//     //     }
-	//     //   }
-	
-	//     // var author = this.state.author.trim()
-	//     // var text = this.state.text.trim()
-	//     // if( !text || !author ){
-	//     //   return;
-	//     // }
-	//     // this.props.handleCommentSubmit({author: author, text: text})
-	//     // this.setState({author:'', text:''})
-	//   // },
-	
-	
-	//   // render: function(){
-	//   //   return(
-	//   //     <form className='comment-form' onSubmit={this.signUp}>
-	
-	//   //     <input type="text" placeholder='Give your image a title' 
-	//   //     value={this.state.title}
-	//   //     onChange={this.handleTitleChange}
-	//   //     />
-	
-	//   //     <input type="text" placeholder='Credit the site you referenced,' 
-	//   //     value={this.state.credit}
-	//   //     onChange={this.handleCreditChange}
-	//   //     />
-	
-	//   //     <input type="text" placeholder='Image link' 
-	//   //     value={this.state.link}
-	//   //     onChange={this.handleLinkChange}
-	//   //     />
-	
-	//   //     <input type="text" placeholder="Add a comment..." 
-	//   //     value={this.state.comment}
-	//   //     onChange={this.handleCommentChange}
-	//   //     />
-	
-	//   //     <input type="submit" value="Enter Comment" />
-	//   //     </form>
-	
-	//   //     )
-	//   // }
-	
-	// // })
-	
-	// // module.exports = CreateImageForm
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26499,6 +26401,12 @@
 	};
 	
 	module.exports = Main;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports) {
+
+	"use strict";
 
 /***/ }
 /******/ ]);
