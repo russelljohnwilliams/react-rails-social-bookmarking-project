@@ -26032,39 +26032,32 @@
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var React = __webpack_require__(1);
 	var Image = __webpack_require__(235);
-	var SmallImage = __webpack_require__(240);
+	var SmallImage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./SmallImage\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var Post = React.createClass({
-	  displayName: 'Post',
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'post-container' },
-	      React.createElement(Image, { images: this.props.images }),
-	      React.createElement(SmallImage, { images: this.props.images })
-	    );
-	  }
+	    displayName: 'Post',
+	    render: function render() {
+	        var _this = this;
+	
+	        var images = this.props.images.filter(function (image) {
+	            return (image.title + ' ' + image.comment + ' ' + image.user.user_name).toUpperCase().indexOf(_this.props.searchQuery.toUpperCase()) >= 0;
+	        }).map(function (image) {
+	            return React.createElement(Image, _extends({}, image, { key: image.id }));
+	        });
+	        return React.createElement(
+	            'div',
+	            { className: 'post-container' },
+	            images,
+	            React.createElement(SmallImage, { images: images })
+	        );
+	    }
 	});
 	
 	module.exports = Post;
-	
-	//   render(){
-	//    const images = this.props.images.filter((image) => `${image.title} ${image.comment} ${image.user.user_name}`.toUpperCase().indexOf(this.props.searchQuery.toUpperCase()) >= 0).map((image) => (<Image {...image} key={image.id} />))
-	//     return(
-	//       <div className="post-container">
-	//           {images}
-	
-	//           <SmallImage images={images} />
-	//       </div>
-	//       )
-	
-	//   }
-	// })
-	
-	// module.exports = Post
-	
 	
 	//   render(){
 	//     return(
@@ -26167,62 +26160,42 @@
 	var Link = _require.Link;
 	
 	
-	var Image = React.createClass({
-	  displayName: 'Image',
+	var Image = function Image(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'image-details' },
+	    React.createElement('img', { src: props.image, className: 'the-image' }),
+	    React.createElement(
+	      'p',
+	      { className: 'image-title' },
+	      'title ~ ',
+	      props.title
+	    ),
+	    React.createElement(
+	      'p',
+	      { className: 'image_comment' },
+	      'comments ~ ',
+	      props.comment
+	    ),
+	    React.createElement(
+	      'a',
+	      { className: 'image-link', href: props.credit },
+	      'link'
+	    )
+	  );
+	};
+	
+	var _React$PropTypes = React.PropTypes;
+	var string = _React$PropTypes.string;
+	var number = _React$PropTypes.number;
 	
 	
-	  render: function render() {
-	    var images = this.props.images.map(function (image) {
-	      return React.createElement(
-	        'div',
-	        { className: 'characterPic' },
-	        React.createElement('img', { src: image.image, className: 'the-image' }),
-	        React.createElement(
-	          'p',
-	          { className: 'image-title' },
-	          'title ~ ',
-	          image.title
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'image_comment' },
-	          'comments ~ ',
-	          image.comment
-	        ),
-	        React.createElement(
-	          'a',
-	          { className: 'image-link', href: image.credit },
-	          'link'
-	        )
-	      );
-	    }.bind(this));
-	    return React.createElement(
-	      'div',
-	      null,
-	      images
-	    );
-	  }
-	
-	});
-	
-	// const Image = (props) => (
-	//   <div className='image-details'>
-	//   <img src={props.image} className='the-image'/>
-	//   <p className='image-title'>title ~ {props.title}</p>
-	//   <p className='image_comment'>comments ~ {props.comment}</p>
-	//   <a className="image-link" href={props.credit} >link</a>
-	//   </div>
-	//   )
-	
-	
-	// const { string, number } = React.PropTypes
-	
-	// Image.propTypes = { 
-	//   title: string.isRequired,
-	//   image: string.isRequired,
-	//   credit: string.isRequired,
-	//   comment: string.isRequired
-	// }
+	Image.propTypes = {
+	  title: string.isRequired,
+	  image: string.isRequired,
+	  credit: string.isRequired,
+	  comment: string.isRequired
+	};
 	
 	module.exports = Image;
 
@@ -26442,58 +26415,6 @@
 	};
 	
 	module.exports = Main;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var _require = __webpack_require__(159);
-	
-	var Link = _require.Link;
-	
-	
-	var SmallImage = function SmallImage(props) {
-	  return React.createElement(
-	    'div',
-	    { className: 'image-details' },
-	    React.createElement('img', { src: props.image, className: 'the-image' }),
-	    React.createElement(
-	      'p',
-	      { className: 'image-title' },
-	      'title ~ ',
-	      props.title
-	    ),
-	    React.createElement(
-	      'p',
-	      { className: 'image_comment' },
-	      'comments ~ ',
-	      props.comment
-	    ),
-	    React.createElement(
-	      'a',
-	      { className: 'image-link', href: props.credit },
-	      'link'
-	    )
-	  );
-	};
-	
-	var _React$PropTypes = React.PropTypes;
-	var string = _React$PropTypes.string;
-	var number = _React$PropTypes.number;
-	
-	
-	Image.propTypes = {
-	  title: string.isRequired,
-	  image: string.isRequired,
-	  credit: string.isRequired,
-	  comment: string.isRequired
-	};
-	
-	module.exports = SmallImage;
 
 /***/ }
 /******/ ]);
